@@ -15,7 +15,7 @@
     list: [
       {url: '/profile', key: 'profile', default: 'Your Profile'},
       {url: '/profile/settings', key: 'settings', default: 'Settings'},
-      {url: '/signout', key: 'signout', default: 'Sign out'},
+      {url: '/auth/signout', key: 'signout', default: 'Sign out'},
     ],
     visible: false,
   }
