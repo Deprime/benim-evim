@@ -36,8 +36,6 @@
           bind:value={user.email}
         />
 
-        {user.email}
-
         <Input
           label="Password"
           placeholder="Enter your password"

@@ -7,7 +7,7 @@
 
 <Navigation />
 
-  <main class="pb-12 lg:min-h-[70vh]">
+  <main class="pb-12 lg:min-h-[70vh] max-w-[1348px] mx-auto">
     <slot />
   </main>
 
