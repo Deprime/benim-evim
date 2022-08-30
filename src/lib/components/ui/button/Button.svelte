@@ -1,10 +1,10 @@
 <script lang="ts">
   import { current_component } from "svelte/internal";
 
+  type Variants = "primary" | "secondary" | "white" | "text";
+
   // Utils
   import { getEventsAction } from "$lib/common/utils";
-
-  // Constants
 
   // Presets
   const events = getEventsAction(current_component);
@@ -13,6 +13,7 @@
   export let loading  = false;
   export let disabled = false;
   export let block    = false;
+  export let type     = "button";
   export let variant  = "primary";
 
   // Data
@@ -31,34 +32,20 @@
       $$block && 'btn-block',
       $$disabled && 'disabled',
       $$loading && 'loading',
-      ($$props.class) && $$props.class
+      $$props.class && $$props.class
     ];
     return list.filter(c => c).join(' ');
   }
 </script>
 
 <button
-  class={cssClassList}
   {...$$restProps}
+  class={cssClassList}
   use:events
 >
   <slot />
 </button>
 
 <style lang="scss">
-  .btn {
-    @apply py-2 px-4;
-    @apply rounded-md;
-    @apply text-sm font-medium;
-    @apply flex justify-center border border-transparent shadow-sm;
-
-    &-primary {
-      @apply rounded-md;
-      @apply text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
-    }
-
-    &-block {
-      @apply w-full;
-    }
-  }
+  @import './Button.scss';
 </style>

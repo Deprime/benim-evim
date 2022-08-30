@@ -9,7 +9,6 @@ import { compute_slots } from "svelte/internal";
   export let closable = false;
 </script>
 
-
 <div class={`alert alert-${variant} ${$$props.class || ''}`}>
   <div class="flex">
     <div class="alert-icon">

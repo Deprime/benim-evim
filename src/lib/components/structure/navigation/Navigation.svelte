@@ -4,7 +4,7 @@
 
   const menu = [
     {url: '/', key: 'home', default: 'Home'},
-    {url: '/about', key: 'about', default: 'About', compare: null},
+    // {url: '/about', key: 'about', default: 'About', compare: null},
     // {url: '/todos', key: 'todos', default: 'Todos', compare: null},
     {url: '/posts', key: 'posts', default: 'Posts', compare: '/posts'},
     {url: '/auth/signin', key: 'signin', default: 'Signin', compare: null},
@@ -51,7 +51,7 @@
         <!-- Mobile menu button -->
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
           aria-controls="mobile-menu"
           aria-expanded="false"
           on:click={e => {visible = !visible}}
@@ -176,8 +176,8 @@
     @apply lg:px-1 lg:pt-1;
 
     &-active {
-      @apply border-indigo-500 text-gray-900;
-      @apply bg-indigo-50  text-indigo-700;
+      @apply border-blue-500 text-gray-900;
+      @apply bg-blue-50  text-blue-700;
       @apply lg:text-gray-900 lg:bg-transparent;
     }
     &:not(.menu-item-active) {
@@ -192,6 +192,6 @@
 
   .profile-avatar {
     @apply flex rounded-full bg-white text-sm;
-    @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
   }
 </style>

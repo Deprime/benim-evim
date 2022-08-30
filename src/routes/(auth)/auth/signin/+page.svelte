@@ -56,7 +56,10 @@
         </div>
 
         <div>
-          <Button type="submit" block>
+          <Button block variant="secondary">
+            Sign in
+          </Button>
+          <Button  block>
             Sign in
           </Button>
         </div>
