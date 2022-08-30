@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import Counter from '$lib/Counter.svelte';
   // Componetns
-  import { Checkbox, Input, Button } from '$lib/components/ui';
+  import { Checkbox, Input, Button, Alert } from '$lib/components/ui';
   import { Logo } from '$lib/components/shared';
 
   // Data
@@ -19,7 +19,9 @@
 <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <Logo class="mx-auto" />
-    <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">Sign in to your account</h2>
+    <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
+      Sign in to your account
+    </h2>
     <!-- <p class="mt-2 text-center text-sm text-gray-600">
       Or
       <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> start your 14-day free trial </a>
@@ -36,8 +38,6 @@
           bind:value={user.email}
         />
 
-        {user.email}
-
         <Input
           label="Password"
           placeholder="Enter your password"
@@ -46,12 +46,12 @@
         />
 
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <Checkbox> Remember me </Checkbox>
+          <div class="text-sm">
+            <a href="/auth/signup" class="font-medium text-indigo-600 hover:text-indigo-500"> Signup </a>
           </div>
 
           <div class="text-sm">
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+            <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
           </div>
         </div>
 
@@ -59,6 +59,15 @@
           <Button type="submit" block>
             Sign in
           </Button>
+        </div>
+
+        <div>
+          <Alert
+            variant="danger"
+            title="Wrong creditionals"
+          >
+            <p>Incorrect email or password</p>
+          </Alert>
         </div>
       </form>
 
