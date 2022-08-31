@@ -1,0 +1,94 @@
+.estate-card {
+  @apply bg-white;
+  @apply p-5 mb-4 pb-10 lg:pb-5;
+  @apply rounded-lg;
+  @apply flex flex-col lg:flex-row;
+  @apply relative;
+
+
+  // Gallery
+  &-gallery {
+    @apply lg:basis-4/12;
+    @apply mb-4 lg:mb-0;
+
+    &-poster {
+      @apply flex justify-center;
+      @apply h-52 lg:h-60;
+      @apply mb-2;
+      @apply overflow-hidden;
+
+      img {
+        @apply rounded-md;
+        @apply h-auto lg:h-60;
+        @apply w-full;
+      }
+    }
+  }
+
+  &-summary {
+    @apply basis-6/12 lg:px-6;
+
+    .estate-price {
+      @apply pb-4;
+      @apply flex flex-row ;
+      @apply items-center;
+
+      &-total {
+        @apply font-semibold text-2xl;
+      }
+      &-meter {
+        @apply text-slate-500;
+        @apply pl-5 pt-1;
+      }
+    }
+
+    .estate-description {
+      @apply mb-6;
+      @apply line-clamp-3 md:line-clamp-6;
+    }
+  }
+
+  // Header
+  &-header {
+    @apply text-xl font-semibold first-letter:capitalize pb-2;
+    @apply hidden lg:block;
+
+    a {
+      @apply text-blue-600 focus:ring-blue-500;
+    }
+
+    &--mobile {
+      @apply block lg:hidden;
+      @apply leading-tight;
+      @apply mb-4;
+    }
+  }
+
+  // Realtor
+  &-realtor {
+    @apply flex flex-row lg:flex-col;
+    @apply lg:basis-2/12;
+    @apply lg:pl-2 lg:pt-1;
+    @apply lg:justify-items-center;
+
+    &-logo {
+      @apply flex w-fit;
+      @apply border rounded p-2;
+      @apply p-2 lg:mb-4;
+      @apply mx-auto
+    }
+
+    &-naming {
+      @apply pl-4 lg:pl-0;
+    }
+  }
+
+  &-company-actions {
+    @apply pt-6;
+    @apply hidden lg:block;
+  }
+
+  &-publish-date {
+    @apply absolute bottom-4 right-6 text-xs text-slate-400;
+  }
+}

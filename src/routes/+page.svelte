@@ -5,6 +5,9 @@
   // Components
   import { EstateListItem } from '$lib/components/shared';
   import { Checkbox, Input, Button } from '$lib/components/ui';
+
+  // Data
+  const posts = data.posts.slice(0, 20);
 </script>
 
 <svelte:head>
@@ -14,13 +17,13 @@
 
 <div class="content">
   <div>
-    <header class="py-8">
-      <h1 class="pb-4 font-semibold text-3xl">
+    <header class="py-6 px-4 lg:py-8 lg:px-0">
+      <h1 class="pb-4 font-semibold text-2xl lg:text-3xl lg:leading-tight">
         <!-- {data.title} -->
         Продажа трехкомнатных квартир в Алании
       </h1>
 
-      <div class="flex flex-row gap-2">
+      <div class="flex flex-row justify-between lg:justify-start gap-2  text-sm lg:text-base">
         <div class="text-slate-400">
           Найдено 1 371 объявление
         </div>
@@ -34,8 +37,8 @@
       {@html data.content}
     </div> -->
 
-    <div class="flex">
-      <aside class="basis-2/12">
+    <div class="flex flex-col lg:flex-row">
+      <aside class="hidden lg:block lg:basis-2/12">
         <!-- Filters -->
         <form class="">
           <div class="border-t border-gray-200 pt-4 pb-4">
@@ -203,8 +206,8 @@
         </form>
       </aside>
 
-      <section class="basis-10/12">
-        {#each data.posts as post}
+      <section class="lg:basis-10/12">
+        {#each posts as post}
           <EstateListItem estate={post} />
         {/each}
       </section>

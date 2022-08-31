@@ -18,13 +18,18 @@
   }
 </script>
 
-<div class="bg-white p-5 mb-4 rounded-lg flex relative">
-  <div class="basis-4/12">
-    <div class="h-60 overflow-hidden  mb-2">
+<div class="estate-card">
+  <h2 class="estate-card-header estate-card-header--mobile">
+    <a href={`/posts/${estate.id}`}>
+      {estate.title}
+    </a>
+  </h2>
+
+  <div class="estate-card-gallery">
+    <div class="estate-card-gallery-poster">
       <img
         src={posterUrl}
         alt="Real estate"
-        class="h-60 overflow-hidden rounded-md"
       >
     </div>
 
@@ -43,14 +48,14 @@
     </div>
   </div>
 
-  <div class="basis-6/12 px-6">
-    <h2 class="text-xl font-semibold first-letter:capitalize pb-2">
-      <a href={`/posts/${estate.id}`} class="text-blue-600 focus:ring-blue-500">
+  <div class="estate-card-summary">
+    <h2 class="estate-card-header">
+      <a href={`/posts/${estate.id}`}>
         {estate.title}
       </a>
     </h2>
 
-    <h3 class="text-base font-semibold pb-2">
+    <h3 class="text-base font-semibold bb-1 lg:pb-2">
       3-комн. кв., 120 м², 4/12 этаж
     </h3>
 
@@ -58,37 +63,43 @@
       Алания, Махмутлар, ул. Фатих, 12
     </div>
 
-    <div class="estate-price pb-4">
-      <h4 class="estate-totla-price font-semibold text-2xl">
+    <div class="estate-price">
+      <h4 class="estate-price-total">
         6 300 000 ₽
       </h4>
 
-      <p class="estate-meter-price text-slate-500">
-        118 868  ₽/м²
+      <p class="estate-price-meter">
+        / &nbsp;&nbsp; 118 868  ₽/м²
       </p>
     </div>
 
-    <div class="pb-6">
+    <div class="estate-description">
       {estate.body}
     </div>
   </div>
 
-  <div class="basis-2/12 pl-2">
-    <div class="pb-4 flex justify-center">
-      <figure class="border rounded p-2 flex w-fit">
-        <Logo class="h-14" />
-      </figure>
+  <div class="estate-card-realtor">
+
+    <div class="estate-card-realtor">
+      <!-- <div class="estate-card-realtor-logo"> -->
+        <!-- <figure class="border rounded p-2 flex w-fit"> -->
+        <figure class="estate-card-realtor-logo">
+          <Logo class="h-10 lg:h-20" />
+        </figure>
+      <!-- </div> -->
+      <div class="estate-card-realtor-naming">
+        <p class="text-slate-500 text-sm">
+          Агентство недвижимости
+        </p>
+
+        <h4 class="font-semibold">
+          GRAND REAL ESTATE
+        </h4>
+      </div>
     </div>
 
-    <p class="text-slate-500 text-sm">
-      Агентство недвижимости
-    </p>
 
-    <h4 class="font-semibold">
-      GRAND REAL ESTATE
-    </h4>
-
-    <div class="pt-8">
+    <div class="estate-card-company-actions">
       <Button block class="mb-2">
         Заказать звонок
       </Button>
@@ -103,7 +114,11 @@
     </div>
   </div>
 
-  <div class="absolute bottom-4 right-6 text-xs text-slate-400">
+  <div class="estate-card-publish-date">
     Опубликовано 12.08.2022
   </div>
 </div>
+
+<style lang="scss">
+  @import './EstateListItem.scss';
+</style>
