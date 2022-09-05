@@ -1,0 +1,111 @@
+{
+  "app": {
+    "intro": "Search for people on the map.<br> Create a meeting, to interest those who are nearby."
+  },
+  "actions": {
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "continue": "Continue",
+    "create": "Create",
+    "delete": "Delete",
+    "update": "Update",
+    "edit": "Edit",
+    "save": "Save",
+    "publicate": "Make a publish",
+    "search": "Search",
+    "lets_go": "Let's go!",
+    "logout": "Logout",
+    "signout": "Sign out"
+  },
+  "errors": {
+    "auth_by_phone": "Incorrect phone or password",
+    "auth_by_email": "Incorrect email or password"
+  },
+  "pages": {
+    "home": {
+      "title": "Home"
+    },
+    "favorites": {
+      "title": "Favorites"
+    },
+    "security": {
+      "title": "Security",
+      "subtitle":"Security settings"
+    },
+    "company": {
+      "title": "Company"
+    },
+    "policy": {
+      "footer": "By creating an account, you agree to our <a href='{terms_url}'>Terms of Service</a>. More about the use of personal data in <a href='{privacy_url}'>Privacy Policy</a>."
+    },
+    "terms": {
+      "title": "Terms of service"
+    },
+    "privacy": {
+      "title": "The policy of confidentiality"
+    },
+    "signup": {
+      "title": "Registration by phone number",
+      "enter_phone": "Enter your phone number",
+      "enter_sms_code": "Enter the SMS code",
+      "resend_timeout": "Resending after {seconds} seconds",
+      "resend_code": "Send the code again",
+      "get_code": "Get the code"
+    },
+    "signup_email": {
+      "title": "Registration by email",
+      "enter_email": "Enter email",
+      "your_email": "Your email",
+      "your_password": "Your password"
+    },
+    "signin": {
+      "title": "Sign in",
+      "cant_signin": "Can't sign in?"
+    },
+    "access_restore": {
+      "title": "Access restore"
+    },
+    "im": {
+      "title": "Messenger",
+      "chats": "Chats",
+      "message": "Message"
+    },
+    "map": {
+      "title": "Event map"
+    },
+    "event": {
+      "title": "Events",
+      "to_posting": "Go to publication",
+      "settings": "Publishing settings"
+    },
+    "profile": {
+      "title": "Profile",
+      "user_data": "Personal data",
+      "whats_your_name": "Hi! what's your name?",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "phone": "Phone number"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "delete_account": "Delete account"
+    },
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "all_categories": "All categories",
+      "event_date": "Event date",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "after_week": "After week",
+      "time_start": "Start time",
+      "start": "Start",
+      "end": "End",
+      "address": "Event address",
+      "reset": "Reset filters",
+      "show_events": "Show {count} events"
+    }
+  }
+}

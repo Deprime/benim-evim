@@ -1,0 +1,9 @@
+.country-prefix-option {
+  display: block;
+  padding-left: 40px;
+  line-height: 30px;
+
+  &.country-prefix-turkey {
+    background-image: url('../../../assets/country/tr.svg');
+  }
+}

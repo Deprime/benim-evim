@@ -1,0 +1,16 @@
+.button-group {
+  @apply isolate inline-flex rounded-md;
+
+  :global(.btn) {
+    &:first-child {
+      @apply rounded-tr-none rounded-br-none;
+    }
+  }
+
+  :global(.btn) {
+    &:last-child {
+      @apply rounded-tl-none rounded-bl-none;
+    }
+  }
+}
+

@@ -8,10 +8,11 @@
 
 	// Props
 	export let value: string|number = '';
-	export let label: string;
+	export let label = "";
   export let type: Types = 'text'
   export let disabled = false;
   export let togglable = false; // for password
+  export let errors: [string]|undefined = undefined;
 
 	// Data
   const events = getEventsAction(current_component);
@@ -26,7 +27,18 @@
   const onInput = (event: any)  => {
     if (!disabled) {
       const val = event.target?.value;
-      value = val;
+      if (['tel', 'number'].includes(type)) {
+        const isNumeric = /^[0-9]*$/.test(val)
+
+        if (isNumeric) {
+          value = val;
+          return
+        }
+        event.target.value = value
+      }
+      else {
+        value = val;
+      }
       dispatch('input', event);
     }
   };
@@ -50,8 +62,8 @@
   };
 </script>
 
-<div class={$$props.class || ''}>
-  {#if label}
+<div class={`ui-element input-control-wrapper ${$$props.class || ''}`}>
+  {#if label && label.length > 0}
     <label
       for={uuid}
       class="block text-sm font-medium text-gray-700"
@@ -62,13 +74,14 @@
 	<div class="mt-1 relative">
 		<input
 			id={uuid}
-			class="shadow-sm focus:ring-indigo-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+      {disabled}
       value={value}
       on:input={onInput}
       on:focus={onFocus}
       on:blur={onBlur}
       type={visible ? "text" : type}
       {...$$restProps}
+			class={`input-control ${disabled ? 'input-control-disabled' : ''}`}
       use:events
 		/>
     {#if togglable}
@@ -84,4 +97,15 @@
       </span>
     {/if}
 	</div>
+  {#if errors}
+    {#each errors as error }
+      <p class="mt-2 text-sm text-red-600">
+        {error}
+      </p>
+    {/each}
+  {/if}
 </div>
+
+<style lang="scss">
+  @import './Input.scss';
+</style>

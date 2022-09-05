@@ -14,6 +14,11 @@ const setupI18n = ({ withLocale: _locale } = { withLocale: DEFAULT_LOCALE}): Pro
   const url = LOCALE_FILE_URL.replace('{locale}', _locale);
   localStorage.setItem('default_locale', _locale);
 
+
+  if (typeof localStorage === 'object') {
+    localStorage.setItem('locale', _locale)
+  }
+
   // const url = (!!LANGS[_locale]) ? LANGS[_locale] : LANGS.en;
   return fetch(url)
     .then(response => response.json())

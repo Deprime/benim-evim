@@ -1,0 +1,35 @@
+.spinner {
+  --l-size: 24px;
+  --l-boarder: 3px;
+
+  position: absolute;
+  display: inline-block;
+  width: var(--l-size);
+  height: var(--l-size);
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    border-radius: 50%;
+    width: var(--l-size);
+    height: var(--l-size);
+    border: var(--l-boarder) solid #fff;
+    width: var(--l-size);
+    height: var(--l-size);
+  }
+  &::before {
+    border: var(--l-boarder) solid #fff;
+    opacity: 0.3;
+  }
+  &::after {
+    border: var(--l-boarder) solid #fff;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    animation: loading-spin 500ms linear infinite;
+  }
+}

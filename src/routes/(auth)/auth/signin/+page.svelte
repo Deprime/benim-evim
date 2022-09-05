@@ -1,14 +1,47 @@
 <script lang="ts">
-	// import Counter from '$lib/Counter.svelte';
+  import { onMount } from 'svelte';
+
   // Componetns
-  import { Checkbox, Input, Button, Alert } from '$lib/components/ui';
   import { Logo } from '$lib/components/shared';
+  import SigninByEmail from './_components/SigninByEmail.svelte';
+  import SigninByPhone from './_components/SigninByPhone.svelte';
+  import VariantSwitcher from './_components/VariantSwitcher.svelte';
+
+  import { dictionaryApi } from '$lib/api';
 
   // Data
-  const user = {
-    email: "",
-    password: "",
+  let loading = false;
+  let prefix_list = [];
+  let validation_type = 0; // 0 - phone, 1 - email
+
+  // Methods
+  /**
+   * On variant change
+   */
+  const onVariantChange = (event: CustomEvent) => {
+    validation_type = event.detail
   }
+
+  /**
+   * loadInititalData
+   */
+  const loadInititalData = async (): Promise<any> => {
+    loading = true;
+    try {
+      const request = await dictionaryApi.getPhonePrefixList();
+      prefix_list = request.data;
+    }
+    catch (error: any) {
+      throw new Error(error)
+    }
+    finally {
+      loading = false;
+    }
+  }
+
+  onMount(async () => {
+    await loadInititalData();
+  })
 </script>
 
 <svelte:head>
@@ -22,58 +55,33 @@
     <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
       Sign in to your account
     </h2>
-    <!-- <p class="mt-2 text-center text-sm text-gray-600">
-      Or
-      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> start your 14-day free trial </a>
-    </p> -->
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6" action="#" method="POST">
-        <Input
-          label="Email address"
-          placeholder="Enter your email"
-          type="email"
-          bind:value={user.email}
+      <!--
+        <VariantSwitcher
+          {loading}
+          on:change={onVariantChange}
         />
+      -->
 
-        <Input
-          label="Password"
-          placeholder="Enter your password"
-          type="password"
-          bind:value={user.password}
-        />
+      {#if validation_type === 0}
+        <SigninByPhone items={prefix_list} />
+      {/if}
+      {#if validation_type === 1}
+        <SigninByEmail />
+      {/if}
 
-        <div class="flex items-center justify-between">
-          <div class="text-sm">
-            <a href="/auth/signup" class="font-medium text-indigo-600 hover:text-indigo-500"> Signup </a>
-          </div>
-
-          <div class="text-sm">
-            <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
-          </div>
+      <div class="pt-8 flex items-center justify-between">
+        <div class="text-sm">
+          <a href="/auth/signup" class="font-medium text-indigo-600 hover:text-indigo-500"> Signup </a>
         </div>
 
-        <div>
-          <Button block variant="secondary">
-            Sign in
-          </Button>
-          <Button  block>
-            Sign in
-          </Button>
+        <div class="text-sm">
+          <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
         </div>
-
-        <div>
-          <Alert
-            variant="danger"
-            title="Wrong creditionals"
-          >
-            <p>Incorrect email or password</p>
-          </Alert>
-        </div>
-      </form>
-
+      </div>
     </div>
   </div>
 </div>

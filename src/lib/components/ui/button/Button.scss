@@ -1,4 +1,5 @@
 .btn {
+  @apply relative;
   @apply py-2 px-4;
   @apply rounded-md;
   @apply text-sm font-medium;
@@ -6,6 +7,17 @@
   @apply rounded-md;
   @apply focus:outline-none;
   @apply focus:ring-2 focus:ring-offset-2;
+
+  &-disabled {
+    opacity: 0.7;
+  }
+
+  &-loading {
+    color: transparent !important;
+    position: relative;
+    @apply flex;
+    @apply items-center content-center;
+  }
 
   &-primary {
     @apply text-white;

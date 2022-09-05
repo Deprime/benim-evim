@@ -1,15 +1,23 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
 	import { page } from '$app/stores';
+  import { _ } from '$lib/config/i18n';
+  import { goto } from '$app/navigation';
+
   import { Logo } from '$lib/components/shared';
+  import { userStore } from '$lib/stores';
 
   const menu = [
     {url: '/', key: 'home', default: 'Home'},
     // {url: '/about', key: 'about', default: 'About', compare: null},
     // {url: '/todos', key: 'todos', default: 'Todos', compare: null},
     {url: '/posts', key: 'posts', default: 'Posts', compare: '/posts'},
+  ];
+
+  const authMenu = [
     {url: '/auth/signin', key: 'signin', default: 'Signin', compare: null},
     {url: '/auth/signup', key: 'signup', default: 'Signup', compare: null},
-  ];
+  ]
 
   const profileMenu = {
     list: [
@@ -24,13 +32,13 @@
 </script>
 
 <nav class="bg-white shadow">
-  <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+  <div class="mx-auto max-w-[1348px] px-2 sm:px-4 lg:px-0">
     <div class="flex h-14 justify-between">
 
       <div class="flex px-2 lg:px-0">
         <div class="flex flex-shrink-0 items-center">
-          <Logo class="block h-8 w-auto lg:hidden" />
-          <Logo class="hidden h-8 w-auto lg:block" />
+          <Logo class="block h-8 w-auto" />
+          <!-- <Logo class="hidden h-8 w-auto lg:block" /> -->
         </div>
         <div class="hidden lg:ml-6 lg:flex lg:space-x-8">
           {#each menu as item}
@@ -41,9 +49,25 @@
               class:menu-item-active={isActive}
               href={item.url}
             >
-              {item.default}
+              {$_(`pages.${item.key}.title`, {default: item.default})}
             </a>
           {/each}
+
+          {#if browser}
+            {#if !$userStore?.token}
+              {#each authMenu as item}
+                {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
+                <a
+                  sveltekit:prefetch
+                  class="menu-item"
+                  class:menu-item-active={isActive}
+                  href={item.url}
+                >
+                  {$_(`pages.${item.key}.title`, {default: item.default})}
+                </a>
+              {/each}
+            {/if}
+          {/if}
         </div>
       </div>
 
@@ -73,56 +97,26 @@
 
         <!-- Profile dropdown -->
         <div class="relative ml-4 flex-shrink-0">
-          <div>
-            <button
-              class="profile-avatar"
-              type="button"
-              aria-expanded="false"
-              aria-haspopup="true"
-              on:click={e => {profileMenu.visible = !profileMenu.visible}}
-            >
-              <span class="sr-only">
-                Open user menu
-              </span>
-              <img
-                class="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
+          {#if $userStore.token}
+            <div>
+              <button
+                class="profile-avatar"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                on:click={() => {goto('/profile')}}
               >
-            </button>
-          </div>
-
-          <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-          <div
-            class="profile-menu"
-            class:hidden={!profileMenu.visible}
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="user-menu-button"
-            tabindex="-1"
-          >
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            {#each profileMenu.list as item, index}
-              <a
-                sveltekit:prefetch
-                href={item.url}
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem"
-                tabindex="-1"
-              >
-                {item.default}
-              </a>
-            {/each}
-          </div>
+                <span class="sr-only">
+                  Open user menu
+                </span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                >
+              </button>
+            </div>
+          {/if}
         </div>
       </div>
     </div>
@@ -140,7 +134,7 @@
           href={item.url}
           on:click={e => {visible = !visible}}
         >
-          {item.default}
+          {$_(`pages.${item.key}`, {default: item.default})}
         </a>
       {/each}
     </div>

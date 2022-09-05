@@ -1,3 +1,18 @@
 .list {
   @apply list-disc space-y-1 pl-5;
 }
+
+.link {
+  @apply text-blue-700 cursor-pointer;
+  &:hover {
+    @apply text-blue-600;
+  }
+}
+
+.error-text {
+  @apply text-sm text-red-600
+}
+
+.success-text {
+  @apply text-sm text-green-600
+}

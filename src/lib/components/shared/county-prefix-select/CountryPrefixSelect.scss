@@ -1,0 +1,4 @@
+.select-control {
+  @apply mt-1 block w-auto rounded-md border-gray-300 py-2 pl-3 pr-10 text-base;
+  @apply focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
+}

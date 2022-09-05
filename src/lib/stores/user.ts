@@ -1,7 +1,8 @@
 import { writable } from 'svelte-local-storage-store';
 
 const $$user = {
-  data: {},
+  data: <any>{},
+  token: <string|null> null,
   loading: false,
 }
 
@@ -19,13 +20,30 @@ const setData = (data: {[name: string]: string}): void => {
   }))
 };
 
+const setToken = (token: string): void => {
+  update(value => ({
+    ...value,
+    token
+  }))
+};
+
+const isLoggedIn = () => {
+  let isLogged = false;
+  subscribe(value => {
+    isLogged = (value.token) ? true : false;
+  });
+  return isLogged;
+}
+
 const userStore = {
   subscribe,
   set,
   update,
   clear,
   setData,
+  setToken,
   setLoading,
+  isLoggedIn,
 };
 
 export default userStore;

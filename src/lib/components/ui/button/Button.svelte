@@ -1,6 +1,8 @@
 <script lang="ts">
   import { current_component } from "svelte/internal";
 
+  import { Spinner } from "$lib/components/ui"
+
   type Variants = "primary" | "secondary" | "white" | "text";
 
   // Utils
@@ -27,11 +29,12 @@
     $$loading: boolean
   ): string => {
     const list = [
+      'ui-element',
       'btn',
       `btn-${$$variant}`,
       $$block && 'btn-block',
-      $$disabled && 'disabled',
-      $$loading && 'loading',
+      $$disabled && 'btn-disabled',
+      $$loading && 'btn-loading',
       $$props.class && $$props.class
     ];
     return list.filter(c => c).join(' ');
@@ -39,11 +42,15 @@
 </script>
 
 <button
+  {disabled}
   {...$$restProps}
   class={cssClassList}
   use:events
 >
   <slot />
+  {#if loading}
+    <Spinner />
+  {/if}
 </button>
 
 <style lang="scss">
