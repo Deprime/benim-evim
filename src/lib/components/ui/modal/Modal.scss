@@ -1,0 +1,31 @@
+
+.modal {
+	position: relative;
+	z-index: 2;
+	background: #fff;
+	width: 772px;
+  @apply rounded-md;
+  @apply py-4 px-6;
+  @apply m-auto;
+
+	&-title {
+    @apply flex text-2xl;
+    @apply pb-5;
+	}
+
+	&-close {
+		position: absolute;
+		top: 5px;
+		right: 16px;
+		font-weight: 400;
+		font-size: 24px;
+		text-decoration: none;
+		margin-left: auto;
+    @apply text-slate-400;
+
+		&:hover {
+			opacity: 0.5;
+			cursor: pointer;
+		}
+	}
+}

@@ -4,14 +4,18 @@
   // import cloneDeep  from 'lodash.clonedeep';
 
   // Componetns
-  import { Checkbox, Input, Button, ButtonGroup } from '$lib/components/ui';
+  import { Input, Button, ButtonGroup, Modal } from '$lib/components/ui';
   import { PageHeader, CountryPrefixSelect, CountryPrefixOption } from '$lib/components/shared';
+  import CompanyBasicForm from './_components/CompanyBasicForm.svelte';
 
   import { userStore } from '$lib/stores';
   import { dictionaryApi, userApi } from '$lib/api';
   import { userService } from '$lib/services';
 
   // Data
+  let show_creator = false;
+  let create_company = false;
+
   let prefix_list: any = [];
   const user: any = {};
   const form = {
@@ -61,7 +65,6 @@
     Object.keys(data).forEach(key => {
       user[key] = data[key];
     })
-    console.log(user)
   })
 </script>
 
@@ -77,7 +80,6 @@
 
   <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="mt-5 md:col-span-2 md:mt-0">
-
       <form on:submit|preventDefault={update}  class="text-sm">
         <div class="shadow sm:overflow-hidden sm:rounded-md">
           <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -85,20 +87,23 @@
               <Input
                 label="Ваше имя"
                 placeholder="Укажите ваше имя"
-                class="w-2/3"
+                class="w-full md:w-2/3"
                 bind:value={user.first_name}
                 disabled={form.loading}
                 errors={form.errors.first_name}
               />
             </div>
 
-            {#if $userStore.data && !$userStore.data.compay}
+            {#if $userStore.data && !$userStore.data.company_id}
               <div class="w-2/3 border-t border-t-slate-200 border-b border-b-slate-200">
                 <div class="py-6">
                   <p class="pb-4">
                     Если вы хотите размещать объявления на сайте и оказывать услуги риэлтора, зарегистрируйте свою компанию.
                   </p>
-                  <Button block>
+                  <Button synthetic block on:click={() => {
+                    create_company = true;
+                    show_creator = true;
+                  }}>
                     Зарегистрировать компанию-риэлтора
                   </Button>
                 </div>
@@ -109,7 +114,7 @@
               <Input
                 label="Ваш email"
                 placeholder="Укажите ваш email"
-                class="w-2/3 pb-3"
+                class="w-full md:w-2/3 pb-3"
                 type="email"
                 bind:value={user.email}
                 disabled={form.loading}
@@ -130,7 +135,7 @@
                 Ваш номер телефона
               </label>
 
-              <ButtonGroup class="w-2/3 pb-3">
+              <ButtonGroup class="w-full md:w-2/3 pb-3">
                 <CountryPrefixSelect
                   class="w-8 mr-2"
                   bind:value={user.prefix}
@@ -167,6 +172,7 @@
               </span>
             </div>
 
+            <!--
             <div class="grid grid-cols-3">
               <div class="col-span-3 sm:col-span-2">
                 <label for="company-website" class="block text-sm font-medium text-gray-700">
@@ -190,6 +196,7 @@
                 </div>
               </div>
             </div>
+            -->
           </div>
 
           <div class="bg-gray-100 px-4 py-3 text-right flex justify-end sm:px-6">
@@ -206,3 +213,14 @@
     </div>
   </div>
 </div>
+
+<Modal
+  bind:visible={show_creator}
+  title={$_('company_creator.title')}
+>
+  {#if create_company}
+    <CompanyBasicForm
+      show_description={false}
+    />
+  {/if}
+</Modal>

@@ -22,8 +22,6 @@
   const profileMenu = {
     list: [
       {url: '/profile', key: 'profile', default: 'Your Profile'},
-      {url: '/profile/settings', key: 'settings', default: 'Settings'},
-      {url: '/auth/signout', key: 'signout', default: 'Sign out'},
     ],
     visible: false,
   }
@@ -31,13 +29,15 @@
   let visible = false;
 </script>
 
-<nav class="bg-white shadow">
+<nav class="bg-white shadow relative">
   <div class="mx-auto max-w-[1348px] px-2 sm:px-4 lg:px-0">
     <div class="flex h-14 justify-between">
 
       <div class="flex px-2 lg:px-0">
         <div class="flex flex-shrink-0 items-center">
-          <Logo class="block h-8 w-auto" />
+          <a href="/">
+            <Logo class="block h-8 w-auto" />
+          </a>
           <!-- <Logo class="hidden h-8 w-auto lg:block" /> -->
         </div>
         <div class="hidden lg:ml-6 lg:flex lg:space-x-8">
@@ -58,7 +58,6 @@
               {#each authMenu as item}
                 {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
                 <a
-                  sveltekit:prefetch
                   class="menu-item"
                   class:menu-item-active={isActive}
                   href={item.url}
@@ -93,9 +92,8 @@
         </button>
       </div>
 
+      <!-- Profile icon desktop -->
       <div class="hidden lg:ml-4 lg:flex lg:items-center">
-
-        <!-- Profile dropdown -->
         <div class="relative ml-4 flex-shrink-0">
           {#if $userStore.token}
             <div>
@@ -123,7 +121,7 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class:hidden={!visible} class="lg:hidden" id="mobile-menu">
+  <div class:hidden={!visible} class="lg:hidden absolute top-full w-full right-0 left-0 z-10 bg-white" id="mobile-menu">
     <div class="space-y-1 pt-2 pb-3">
       {#each menu as item}
         {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
@@ -134,30 +132,47 @@
           href={item.url}
           on:click={e => {visible = !visible}}
         >
-          {$_(`pages.${item.key}`, {default: item.default})}
+          {$_(`pages.${item.key}.title`, {default: item.default})}
         </a>
       {/each}
     </div>
 
-    <div class="border-t border-gray-200 pt-4 pb-3">
-      <div class="flex items-center px-4">
-        <div class="flex-shrink-0">
-          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+    {#if browser && $userStore?.token}
+      <!-- Mobile nav menu -->
+      <section class="border-t border-gray-200 pt-4 pb-3">
+        <div class="flex items-center px-4">
+          <div class="flex-shrink-0">
+            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+          </div>
+          <div class="ml-3">
+            <div class="text-base font-medium text-gray-800">
+              {$userStore?.data?.first_name || "New user"}
+            </div>
+            {#if $userStore?.data?.email}
+              <div class="text-sm font-medium text-gray-500">
+                {$userStore.data.email}
+              </div>
+            {/if}
+          </div>
         </div>
-        <div class="ml-3">
-          <div class="text-base font-medium text-gray-800">Tom Cook</div>
-          <div class="text-sm font-medium text-gray-500">tom@example.com</div>
-        </div>
-      </div>
-      <div class="mt-3 space-y-1">
-        <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Your Profile</a>
-        <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Settings</a>
-        <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Sign out</a>
-      </div>
-    </div>
+        <nav class="mt-3 space-y-1">
+          {#each profileMenu.list as item}
+            {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
+            <a
+              class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              class:menu-item-active={isActive}
+              href={item.url}
+              on:click={e => {visible = !visible}}
+            >
+              {$_(`pages.${item.key}.title`, {default: item.default})}
+            </a>
+          {/each}
+        </nav>
+      </section>
+    {/if}
+
   </div>
 </nav>
-
 
 <style lang="scss">
   .menu-item {

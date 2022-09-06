@@ -33,7 +33,12 @@
       "subtitle":"Security settings"
     },
     "company": {
-      "title": "Company"
+      "title": "Company",
+      "subtitle": "Company settings"
+    },
+    "posts": {
+      "title": "Ads",
+      "subtitle": "Ads"
     },
     "policy": {
       "footer": "By creating an account, you agree to our <a href='{terms_url}'>Terms of Service</a>. More about the use of personal data in <a href='{privacy_url}'>Privacy Policy</a>."
@@ -106,6 +111,13 @@
       "address": "Event address",
       "reset": "Reset filters",
       "show_events": "Show {count} events"
+    },
+
+    "company_creator": {
+      "title": "Company registration",
+      "desc1": "Let's quickly register your company.",
+      "desc2": "Fill in the Company Name, Address and any of the messengers.",
+      "desc3": "The more information you fill out, the easier it will be for the client to contact you."
     }
   }
 }

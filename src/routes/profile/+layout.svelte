@@ -1,37 +1,26 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { _ } from '$lib/config/i18n';
 	import { page } from '$app/stores';
   import { browser } from '$app/environment';
-
-  // Componetns
-  // import { Checkbox, Input, Button } from '$lib/components/ui';
 
   import { UserIcon } from 'svelte-feather-icons'
   import { userStore } from '$lib/stores';
 
   // Data
-  const menu = {
-    list: [
-      {url: '/profile', key: 'profile', default: 'Your Profile'},
-      $userStore.data.compay
-        ? {url: '/profile/company', key: 'company', default: 'Company'}
-        : null,
-      {url: '/profile/security', key: 'security', default: 'Security'},
-      {url: '/profile/favorites', key: 'favorites', default: 'Favorites'},
-    ],
-    visible: false,
-  }
-  menu.list = menu.list.filter(el => el);
+  const profileMenu = [
+    {url: '/profile', key: 'profile', default: 'Your Profile'},
+    {url: '/profile/security', key: 'security', default: 'Security'},
+    {url: '/profile/favorites', key: 'favorites', default: 'Favorites'},
+  ];
 
-  const menu2 = {
-    list: [
-      {url: '/auth/signout', key: 'signout', default: 'Sign out'},
-    ],
-    visible: false,
-  }
+  const companyMenu = [
+    {url: '/profile/company', key: 'company', default: 'Company'},
+    {url: '/profile/posts', key: 'posts', default: 'Posts'},
+  ];
 
-  // onMount(() => {})
+  const defaultMenu = [
+    {url: '/auth/signout', key: 'signout', default: 'Sign out'}
+  ];
 </script>
 
 {#if browser}
@@ -49,9 +38,34 @@
             {/if}
           </figure>
         </div>
+
         <nav class="profile-navigation">
+          {#if $userStore.data.company_id}
+            <ul>
+              <li class="menu-title">
+                {$_(`pages.company.title`)}
+              </li>
+              {#each companyMenu as item}
+                {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
+                <li class:menu-item-active={isActive}>
+                  <a
+                    href={item.url}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    {$_(`pages.${item.key}.title`, {default: item.default})}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+
           <ul>
-            {#each menu.list as item}
+            <li class="menu-title">
+              {$_(`pages.profile.title`)}
+            </li>
+            {#each profileMenu as item}
               {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
               <li class:menu-item-active={isActive}>
                 <a
@@ -67,7 +81,7 @@
           </ul>
 
           <ul>
-            {#each menu2.list as item}
+            {#each defaultMenu as item}
               <li>
                 <a
                   href={item.url}
@@ -112,6 +126,11 @@
 
       li {
         @apply block;
+
+        &.menu-title {
+          @apply text-slate-900 pb-2 pl-3;
+        }
+
         a {
           @apply block rounded-md;
           @apply my-1 px-3 py-2;

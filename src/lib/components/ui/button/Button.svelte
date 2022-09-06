@@ -17,6 +17,7 @@
   export let block    = false;
   export let type     = "button";
   export let variant  = "primary";
+  export let synthetic  = false;
 
   // Data
   $: cssClassList = getCssClassList(variant, block, disabled, loading);
@@ -41,17 +42,31 @@
   }
 </script>
 
-<button
-  {disabled}
-  {...$$restProps}
-  class={cssClassList}
-  use:events
->
-  <slot />
-  {#if loading}
-    <Spinner />
-  {/if}
-</button>
+{#if !synthetic}
+  <button
+    {disabled}
+    {...$$restProps}
+    class={cssClassList}
+    use:events
+  >
+    <slot />
+    {#if loading}
+      <Spinner />
+    {/if}
+  </button>
+{:else}
+  <span
+    {disabled}
+    {...$$restProps}
+    class={cssClassList}
+    use:events
+  >
+    <slot />
+    {#if loading}
+      <Spinner />
+    {/if}
+  </span>
+{/if}
 
 <style lang="scss">
   @import './Button.scss';
