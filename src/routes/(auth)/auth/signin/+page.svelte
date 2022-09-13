@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from '$lib/config/i18n';
   import { onMount } from 'svelte';
 
   // Componetns
@@ -45,7 +46,9 @@
 </script>
 
 <svelte:head>
-	<title>Sign in</title>
+	<title>
+    {$_('pages.signin.title')}
+  </title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
@@ -53,12 +56,12 @@
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <Logo class="mx-auto" />
     <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
-      Sign in to your account
+      {$_('pages.signin.title')}
     </h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 space-y-6">
       <!--
         <VariantSwitcher
           {loading}
@@ -73,15 +76,20 @@
         <SigninByEmail />
       {/if}
 
-      <div class="pt-8 flex items-center justify-between">
+      <div class="flex items-center justify-between">
         <div class="text-sm">
-          <a href="/auth/signup" class="font-medium text-indigo-600 hover:text-indigo-500"> Signup </a>
+          <a href="/auth/signup" class="font-medium text-indigo-600 hover:text-indigo-500">
+            {$_('actions.signup')}
+          </a>
         </div>
 
         <div class="text-sm">
-          <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+          <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500">
+            {$_('pages.signup.forgot_password')}
+          </a>
         </div>
       </div>
+
     </div>
   </div>
 </div>

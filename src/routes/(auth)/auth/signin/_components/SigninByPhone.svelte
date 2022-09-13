@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { _ } from '$lib/config/i18n';
   import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
   // Componetns
-  import { Input, Button, ButtonGroup, Alert } from '$lib/components/ui';
+  import { Input, Button, ButtonGroup, Alert, Label } from '$lib/components/ui';
   import { CountryPrefixOption, CountryPrefixSelect } from '$lib/components/shared';
 
   import { userApi } from '$lib/api';
@@ -69,13 +70,13 @@
 
 <form class="space-y-6" on:submit|preventDefault={submit}>
   <div>
-    <label for="" class="block text-sm font-medium text-gray-700">
-      Phone number
-    </label>
+    <Label for="phone">
+      {$_('pages.profile.phone')}
+    </Label>
 
     <ButtonGroup class="w-full">
       <CountryPrefixSelect
-        class="w-8 mr-2"
+        class="w-20 w-8 mr-2 mt-0"
         bind:value={form.prefix}
         disabled={form.loading || form.is_phone_valid}
       >
@@ -90,7 +91,7 @@
       </CountryPrefixSelect>
       <Input
         class="w-full"
-        placeholder="Enter phone number"
+        placeholder={$_('pages.signup.enter_phone')}
         type="number"
         name="phone"
         required
@@ -102,8 +103,8 @@
 
   <div>
     <Input
-      label="Password"
-      placeholder="Enter your password"
+      label={$_('pages.profile.password')}
+      placeholder={$_('pages.signup.enter_password')}
       type="password"
       bind:value={form.password}
       togglable
@@ -117,7 +118,7 @@
       disabled={form.loading}
       loading={form.loading}
     >
-      Sign in
+    {$_('actions.signin')}
     </Button>
   </div>
 

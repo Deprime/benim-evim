@@ -11,7 +11,7 @@
     {url: '/', key: 'home', default: 'Home'},
     // {url: '/about', key: 'about', default: 'About', compare: null},
     // {url: '/todos', key: 'todos', default: 'Todos', compare: null},
-    {url: '/posts', key: 'posts', default: 'Posts', compare: '/posts'},
+    // {url: '/posts', key: 'posts', default: 'Posts', compare: '/posts'},
   ];
 
   const authMenu = [

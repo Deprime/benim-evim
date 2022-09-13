@@ -21,13 +21,19 @@ const $axios = axios.create({
  * Pre config of axios request
  */
 $axios.interceptors.request.use((config) => {
-  if (localStorage?.user) {
-    const json = localStorage.getItem("user");
-    const user = JSON.parse(json);
-    const token = user.token;
-    config.headers.Authorization = `Bearer ${token}`;
+  if (typeof localStorage !== "undefined") {
+    if (localStorage?.user) {
+      const json = localStorage.getItem("user");
+      const user = JSON.parse(json);
+      const token = user.token;
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    config.headers["Accept-Language"] = localStorage?.locale || DEFAULT_LOCALE;
   }
-  config.headers["Accept-Language"]  = localStorage?.locale || DEFAULT_LOCALE;
+  else {
+    config.headers["Accept-Language"] = DEFAULT_LOCALE;
+  }
+
   return config;
 });
 

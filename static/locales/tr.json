@@ -15,7 +15,9 @@
     "search": "Arayış",
     "lets_go": "Gittiler",
     "logout": "Çıkmak",
-    "signout": "Çıkmak"
+    "signout": "Çıkmak",
+    "get_code": "Kodu al",
+    "confirm": "Onaylamak"
   },
 
   "errors": {
@@ -59,9 +61,11 @@
       "title": "Telefon numarasına göre kayıt olun",
       "enter_phone": "Lütfen telefon numarasını belirtin",
       "enter_sms_code": "Kodu sms'den girin",
+      "enter_password": "Şifrenizi girin",
       "resend_timeout": "{seconds} saniye sonra tekrar gönderiliyor",
       "resend_code": "Kodu tekrar gönder",
-      "get_code": "Kodu al"
+      "get_code": "Kodu al",
+      "forgot_password": "Şifreyi unuttunuz mu?"
     },
     "signup_email": {
       "title": "E-posta ile kayıt olun",
@@ -96,7 +100,7 @@
       "name": "Ad",
       "email": "Email",
       "password": "Parola",
-      "phone": "Telefon"
+      "phone": "Telefon numarası"
     },
     "settings": {
       "title": "Ayarlar",

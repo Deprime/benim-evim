@@ -15,7 +15,9 @@
     "search": "Поиск",
     "lets_go": "Поехали",
     "logout": "Выйти",
-    "signout": "Выйти"
+    "signout": "Выйти",
+    "get_code": "Получить код",
+    "confirm": "Подтвердить"
   },
 
   "errors": {
@@ -58,9 +60,11 @@
       "title": "Регистрация",
       "enter_phone": "Укажите номер телефона",
       "enter_sms_code": "Введите код из СМС",
+      "enter_password": "Введите ваш пароль",
       "resend_timeout": "Повторная отправка через {seconds} сек",
       "resend_code": "Отправить код повторно",
-      "get_code": "Получить код"
+      "get_code": "Получить код",
+      "forgot_password": "Забыли пароль?"
     },
     "signup_email": {
       "title": "Регистрация по email",
@@ -95,7 +99,7 @@
       "name": "Имя",
       "email": "Email",
       "password": "Пароль",
-      "phone": "Телефон"
+      "phone": "Номер телефона"
     },
     "settings": {
       "title": "Настройки",

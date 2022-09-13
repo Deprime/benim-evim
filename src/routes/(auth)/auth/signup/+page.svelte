@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { _ } from '$lib/config/i18n';
+
   import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
   // Componetns
-  import { Checkbox, Input, Button, ButtonGroup, Select, SelectItem } from '$lib/components/ui';
+  import { Input, Button, ButtonGroup, Label } from '$lib/components/ui';
   import { Logo, CountryPrefixOption, CountryPrefixSelect } from '$lib/components/shared';
 
   import { userApi, dictionaryApi } from '$lib/api';
@@ -170,7 +172,9 @@
 </script>
 
 <svelte:head>
-	<title>Sign up</title>
+	<title>
+    {$_('pages.signup.title')}
+  </title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
@@ -178,7 +182,7 @@
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <Logo class="mx-auto" />
     <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
-      Sign up
+      {$_('pages.signup.title')}
     </h2>
   </div>
 
@@ -209,13 +213,13 @@
       <form class="space-y-6" on:submit|preventDefault={submit}>
         {#if form.validation_type === 0 }
           <div>
-            <label for="" class="block text-sm font-medium text-gray-700">
-              Phone number
-            </label>
+            <Label for="phone">
+              {$_('pages.profile.phone')}
+            </Label>
 
             <ButtonGroup class="w-full">
               <CountryPrefixSelect
-                class="w-8 mr-2"
+                class="w-20 mr-2 mt-0"
                 bind:value={form.prefix}
                 disabled={form.loading || form.is_phone_valid}
               >
@@ -230,7 +234,7 @@
               </CountryPrefixSelect>
               <Input
                 class="w-full"
-                placeholder="Enter phone number"
+                placeholder={$_('pages.signup.enter_phone')}
                 type="number"
                 name="phone"
                 required
@@ -258,6 +262,7 @@
               />
             </div>
           {/if}
+
           {#if form.is_phone_verified}
             <div>
               <Input
@@ -279,7 +284,7 @@
                 disabled={form.loading}
                 loading={form.loading}
               >
-                Sign up
+                {$_('actions.signup')}
               </Button>
             {/if}
             {#if form.is_phone_valid && !form.is_phone_verified}
@@ -289,7 +294,7 @@
                 disabled={form.loading || form.validation_code.length !== 4}
                 loading={form.loading}
               >
-                Submit code
+                {$_('actions.get_code')}
               </Button>
             {/if}
             {#if !form.is_phone_valid}
@@ -299,7 +304,7 @@
                 disabled={form.loading}
                 loading={form.loading}
               >
-                Send validation code
+                {$_('actions.confirm')}
               </Button>
             {/if}
           </div>
@@ -335,11 +340,15 @@
 
         <div class="flex items-center justify-between">
           <div class="text-sm">
-            <a href="/auth/signin" class="font-medium text-indigo-600 hover:text-indigo-500"> Signin </a>
+            <a href="/auth/signin" class="font-medium text-indigo-600 hover:text-indigo-500">
+              {$_('actions.signin')}
+            </a>
           </div>
 
           <div class="text-sm">
-            <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+            <a href="/auth/forgot-password"class="font-medium text-indigo-600 hover:text-indigo-500">
+              {$_('pages.signup.forgot_password')}
+            </a>
           </div>
         </div>
       </form>

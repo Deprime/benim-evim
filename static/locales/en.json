@@ -15,7 +15,9 @@
     "search": "Search",
     "lets_go": "Let's go!",
     "logout": "Logout",
-    "signout": "Sign out"
+    "signout": "Sign out",
+    "get_code": "Get the code",
+    "confirm": "Confirm"
   },
   "errors": {
     "auth_by_phone": "Incorrect phone or password",
@@ -56,9 +58,11 @@
       "title": "Registration by phone number",
       "enter_phone": "Enter your phone number",
       "enter_sms_code": "Enter the SMS code",
+      "enter_password": "Enter your password",
       "resend_timeout": "Resending after {seconds} seconds",
       "resend_code": "Send the code again",
-      "get_code": "Get the code"
+      "get_code": "Get the code",
+      "forgot_password": "Forgot your password?"
     },
     "signup_email": {
       "title": "Registration by email",
