@@ -6,7 +6,6 @@
   import { PageHeader  } from '$lib/components/shared';
 
   import { userApi } from '$lib/api';
-import { error } from '@sveltejs/kit';
 
   // Data
   const user: any = {

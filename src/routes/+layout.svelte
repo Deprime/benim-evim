@@ -5,6 +5,7 @@
 
   // Components
   import { Navigation, Footer } from '$lib/components/structure';
+  import Notifications from 'svelte-notifications';
 
   // Serivces
   import { setupI18n, isLocaleLoaded, dir, locale } from '$lib/config/i18n';
@@ -38,13 +39,15 @@
 
 {#if !$page.error}
   {#if $isLocaleLoaded}
-    <Navigation />
-
-    <main class="pb-12 lg:min-h-[70vh] max-w-[1348px] mx-auto">
-      <slot />
-    </main>
-
-    <Footer />
+    <Notifications>
+      <div>
+        <Navigation />
+        <main class="pb-12 lg:min-h-[70vh] max-w-[1348px] mx-auto">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </Notifications>
   {/if}
 {:else}
   {#if $isLocaleLoaded}

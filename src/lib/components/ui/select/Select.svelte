@@ -24,9 +24,7 @@
     {...$$restProps}
     class={`select-control`}
   >
-    <option>United States</option>
-    <option selected>Canada</option>
-    <option>Mexico</option>
+    <slot />
   </select>
 </div>
 

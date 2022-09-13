@@ -5,7 +5,7 @@
   import { Logo } from '$lib/components/shared';
   import SigninByEmail from './_components/SigninByEmail.svelte';
   import SigninByPhone from './_components/SigninByPhone.svelte';
-  import VariantSwitcher from './_components/VariantSwitcher.svelte';
+  // import VariantSwitcher from './_components/VariantSwitcher.svelte';
 
   import { dictionaryApi } from '$lib/api';
 

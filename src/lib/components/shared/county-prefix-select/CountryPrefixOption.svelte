@@ -9,7 +9,6 @@
 
   // Data
   const events = getEventsAction(current_component);
-  const dispatch = createEventDispatcher();
 </script>
 
 <option

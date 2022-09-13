@@ -1,59 +1,38 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { _ } from '$lib/config/i18n';
+  import { goto } from '$app/navigation';
 
   // Componetns
-  import { Input, Button, Alert } from '$lib/components/ui';
-  import { PageHeader  } from '$lib/components/shared';
+  import { Button } from '$lib/components/ui';
+  import { PageHeader, EstateListItem } from '$lib/components/shared';
 
-  import { userApi } from '$lib/api';
-import { error } from '@sveltejs/kit';
+  import { estateApi } from '$lib/api';
 
   // Data
-  const user: any = {
-    password: "",
-    password_confirmation : "",
-  };
-  const form = {
-    loading: false,
-    errors: {},
-    success: false,
-  }
+  const CREATE_URL = '/profile/posts/create';
+  let errors = {};
+  let estateList = <any>[];
+  let loading = true;
 
-  $: isPasswordsEqual = checkPasswordsEqual(user.password, user.password_confirmation );
-
-  /**
-   * checkPasswordsEqual
-   */
-  const checkPasswordsEqual = (
-    password: string,
-    password_confirmation : string
-  ): boolean => {
-    if (password.length > 0 && password_confirmation .length > 0) {
-      return password === password_confirmation ;
-    }
-    return false;
-  }
-
-  /**
-   * Update profile
-   */
-  const update = async () => {
-    form.loading = true;
+  const loadEstateList = async () => {
+    loading = true;
     try {
-      await userApi.changePassword(user.password, user.password_confirmation);
-      form.errors = {};
-      user.password = "";
-      user.password_confirmation = "";
-      form.success = true;
+      const response = await estateApi.list();
+      estateList = response.data.estate_list
     }
     catch (error: any) {
-      form.errors = error.response?.data || {};
+      errors = error.response?.data || {};
       throw new Error(error)
     }
     finally {
-      form.loading = false;
+      loading = false;
     }
   }
+
+  onMount(async () => {
+    await loadEstateList();
+  })
 </script>
 
 <svelte:head>
@@ -66,59 +45,39 @@ import { error } from '@sveltejs/kit';
 <div class="min-h-full flex flex-col justify-center">
   <PageHeader>
     {$_(`pages.posts.subtitle`)}
+    <div slot="actions">
+      <Button on:click={() => {goto(CREATE_URL)}}>
+        Создать обьявление
+      </Button>
+    </div>
   </PageHeader>
 
-  <div class="">
-    <div class="mt-5 md:mt-0">
-      <form on:submit|preventDefault={update}  class="text-sm">
-        <div class="shadow sm:overflow-hidden sm:rounded-md">
-          <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-            {#if form.success}
-              <Alert variant="success">
-                Ваш пароль обновлён.
-              </Alert>
-            {:else}
-              <Alert variant="info">
-                <ul class="list">
-                  <li>Количество символов в поле Пароль должно быть не менее 6.</li>
-                  <li>Пароль должен содержать заглавные, строчные латинские буквы и цифры</li>
-                </ul>
-              </Alert>
-            {/if}
-
-            <div>
-              <Input
-                label="Новый пароль"
-                class="w-2/3"
-                type="password"
-                bind:value={user.password}
-                disabled={form.loading}
-              />
-            </div>
-
-            <div>
-              <Input
-                label="Повторите новый пароль"
-                class="w-2/3 pb-3"
-                type="password"
-                bind:value={user.password_confirmation }
-                disabled={form.loading}
-                errors={form.errors.password}
-              />
-            </div>
-          </div>
-
-          <div class="bg-gray-100 px-4 py-3 text-right flex justify-end sm:px-6">
-            <Button
-              type="submit"
-              loading={form.loading}
-              disabled={form.loading || !isPasswordsEqual}
-            >
-              {$_('actions.save')}
-            </Button>
-          </div>
-        </div>
-      </form>
+  {#if loading}
+    <div class="space-y-6 bg-white px-4 py-5 sm:p-6  rounded-lg">
+      <div class="flex flex-col justify-center items-center py-10 space-y-6 bg-white">
+        Загрузка...
+      </div>
     </div>
-  </div>
+  {:else}
+    {#if estateList.length > 0}
+      <section>
+        {#each estateList as estate}
+          <EstateListItem {estate} editorMode />
+        {/each}
+      </section>
+    {:else}
+      <div class="space-y-6 bg-white px-4 py-5 sm:p-6  rounded-lg">
+        <div class="flex flex-col justify-center items-center py-10 space-y-6 bg-white">
+          <p class="text-sm">
+            Список актвных обьявлений пуст.
+          </p>
+
+          <Button on:click={() => {goto(CREATE_URL)}}>
+            Создать обьявление
+          </Button>
+        </div>
+      </div>
+    {/if}
+  {/if}
+
 </div>

@@ -4,7 +4,7 @@
   import { goto } from '$app/navigation';
 
   // Componetns
-  import { Input, Textarea, Button, Alert } from '$lib/components/ui';
+  import { Input, Textarea, Editor, Button, Alert } from '$lib/components/ui';
 
   // Services
   import { userService } from '$lib/services';
@@ -74,7 +74,6 @@
     form.loading = true;
     try {
       formatContacts();
-
       await companyApi.create(company);
       await userService.getProfile();
 
@@ -130,8 +129,6 @@
       await getContactList();
 
       if (mode === "update") {
-        console.log(company.contacts)
-
         company.contacts.forEach((contact: any) => {
           const { pivot } = contact
           if (contact.content_type === "messenger") {
@@ -185,13 +182,16 @@
 
     {#if show_description}
       <div>
-        <Textarea
+        <Editor
+          bind:value={company.description}
+        />
+        <!-- <Textarea
           label="Описание компании"
           placeholder="Краткое описание вашей компании"
           bind:value={company.description}
           disabled={form.loading}
           errors={form.errors.description}
-        />
+        /> -->
       </div>
     {/if}
 

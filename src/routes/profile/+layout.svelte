@@ -15,7 +15,7 @@
 
   const companyMenu = [
     {url: '/profile/company', key: 'company', default: 'Company'},
-    {url: '/profile/posts', key: 'posts', default: 'Posts'},
+    {url: '/profile/posts', compare: '/profile/posts', key: 'posts', default: 'Posts'},
   ];
 
   const defaultMenu = [
@@ -40,6 +40,25 @@
         </div>
 
         <nav class="profile-navigation">
+          <ul>
+            <li class="menu-title">
+              {$_(`pages.profile.title`)}
+            </li>
+            {#each profileMenu as item}
+              {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
+              <li class:menu-item-active={isActive}>
+                <a
+                  href={item.url}
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  {$_(`pages.${item.key}.title`, {default: item.default})}
+                </a>
+              </li>
+            {/each}
+          </ul>
+
           {#if $userStore.data.company_id}
             <ul>
               <li class="menu-title">
@@ -60,25 +79,6 @@
               {/each}
             </ul>
           {/if}
-
-          <ul>
-            <li class="menu-title">
-              {$_(`pages.profile.title`)}
-            </li>
-            {#each profileMenu as item}
-              {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
-              <li class:menu-item-active={isActive}>
-                <a
-                  href={item.url}
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  role="menuitem"
-                  tabindex="-1"
-                >
-                  {$_(`pages.${item.key}.title`, {default: item.default})}
-                </a>
-              </li>
-            {/each}
-          </ul>
 
           <ul>
             {#each defaultMenu as item}

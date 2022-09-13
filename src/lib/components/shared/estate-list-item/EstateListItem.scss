@@ -7,23 +7,7 @@
 
 
   // Gallery
-  &-gallery {
-    @apply lg:basis-4/12;
-    @apply mb-4 lg:mb-0;
-
-    &-poster {
-      @apply flex justify-center;
-      @apply h-52 lg:h-60;
-      @apply mb-2;
-      @apply overflow-hidden;
-
-      img {
-        @apply rounded-md;
-        @apply h-auto lg:h-60;
-        @apply w-full;
-      }
-    }
-  }
+  &-gallery-wrapper {}
 
   &-summary {
     @apply basis-6/12 lg:px-6;
@@ -89,6 +73,7 @@
   }
 
   &-publish-date {
-    @apply absolute bottom-4 right-6 text-xs text-slate-400;
+    // @apply absolute bottom-3 right-6 text-xs text-slate-400;
+    @apply pt-2 text-xs text-slate-400;
   }
 }

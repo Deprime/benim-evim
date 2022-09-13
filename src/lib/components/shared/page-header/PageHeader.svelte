@@ -1,3 +1,7 @@
+<script>
+import { compute_slots } from "svelte/internal";
+
+</script>
 <header class="mb-0 ml-2 md:mb-10 md:lm-0">
   <div class="mt-2 md:flex md:items-center md:justify-between">
     <div class="min-w-0 flex-1">
@@ -6,9 +10,10 @@
       </h2>
     </div>
 
-    <div class="mt-4 flex flex-shrink-0 md:mt-0 md:ml-4 hidden">
-      <button type="button" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Edit</button>
-      <button type="button" class="ml-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Publish</button>
-    </div>
+    {#if $$slots.actions}
+      <div class="mt-4 flex flex-shrink-0 md:mt-0 md:ml-4">
+        <slot name="actions"></slot>
+      </div>
+    {/if}
   </div>
 </header>

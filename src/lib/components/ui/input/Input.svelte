@@ -4,6 +4,8 @@
   import { getEventsAction } from "$lib/common/utils";
   import { EyeIcon, EyeOffIcon } from 'svelte-feather-icons'
 
+  import Label from '../label/Label.svelte'
+
   type Types = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
 
 	// Props
@@ -11,6 +13,7 @@
 	export let label = "";
   export let type: Types = 'text'
   export let disabled = false;
+  export let required = false;
   export let togglable = false; // for password
   export let errors: [string]|undefined = undefined;
 
@@ -64,17 +67,19 @@
 
 <div class={`ui-element input-control-wrapper ${$$props.class || ''}`}>
   {#if label && label.length > 0}
-    <label
-      for={uuid}
-      class="block text-sm font-medium text-gray-700"
-    >
+    <Label for={uuid}>
       {label}
-    </label>
+
+      {#if required}
+        <span class="text-red-500">*</span>
+      {/if}
+    </Label>
   {/if}
-	<div class="mt-1 relative">
+	<div class="relative">
 		<input
 			id={uuid}
       {disabled}
+      {required}
       value={value}
       on:input={onInput}
       on:focus={onFocus}

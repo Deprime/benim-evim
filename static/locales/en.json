@@ -40,6 +40,9 @@
       "title": "Ads",
       "subtitle": "Ads"
     },
+    "post_editor": {
+      "title": "Post editor"
+    },
     "policy": {
       "footer": "By creating an account, you agree to our <a href='{terms_url}'>Terms of Service</a>. More about the use of personal data in <a href='{privacy_url}'>Privacy Policy</a>."
     },

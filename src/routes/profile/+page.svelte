@@ -4,8 +4,8 @@
   // import cloneDeep  from 'lodash.clonedeep';
 
   // Componetns
-  import { Input, Button, ButtonGroup, Modal } from '$lib/components/ui';
-  import { PageHeader, CountryPrefixSelect, CountryPrefixOption } from '$lib/components/shared';
+  import { Input, Button, Label, Modal } from '$lib/components/ui';
+  import { PageHeader  } from '$lib/components/shared';
   import CompanyBasicForm from './_components/CompanyBasicForm.svelte';
 
   import { userStore } from '$lib/stores';
@@ -131,35 +131,19 @@
             </div>
 
             <div>
-              <label for="" class="block text-sm font-medium text-gray-700">
+              <Label for="phone">
                 Ваш номер телефона
-              </label>
+              </Label>
 
-              <ButtonGroup class="w-full md:w-2/3 pb-3">
-                <CountryPrefixSelect
-                  class="w-8 mr-2"
-                  bind:value={user.prefix}
-                  disabled
-                >
-                  {#each prefix_list as item, key}
-                    <CountryPrefixOption
-                      key={item.country}
-                      value={item.prefix}
-                    >
-                      {item.prefix}
-                    </CountryPrefixOption>
-                  {/each}
-                </CountryPrefixSelect>
-                <Input
-                  class="w-full"
-                  placeholder="Enter phone number"
-                  type="number"
-                  name="phone"
-                  required
-                  disabled
-                  bind:value={user.phone}
-                />
-              </ButtonGroup>
+              <Input
+                id="phone"
+                class="w-1/2"
+                placeholder="Enter phone number"
+                type="text"
+                name="phone"
+                disabled
+                value={`${user.prefix} ${user.phone}`}
+              />
 
               <p class="pb-1 text-gray-500">
                 {#if user.phone_verified_at}

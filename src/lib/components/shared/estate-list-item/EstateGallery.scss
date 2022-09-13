@@ -1,0 +1,29 @@
+.estate-card {
+  &-picture-counter {
+    @apply z-10 absolute bottom-1 right-1;
+    @apply bg-slate-900 bg-opacity-70;
+    @apply text-white text-xs;
+    @apply inline-block px-1 pb-0.5;
+    @apply rounded;
+  }
+
+  // Gallery
+  &-gallery {
+    @apply lg:basis-4/12;
+    @apply mb-4 lg:mb-0;
+
+    &-poster {
+      @apply flex justify-center;
+      @apply h-52 lg:h-60;
+      @apply mb-2;
+      @apply overflow-hidden;
+      @apply relative;
+
+      img {
+        @apply rounded-md;
+        @apply h-auto lg:h-60;
+        @apply w-full;
+      }
+    }
+  }
+}

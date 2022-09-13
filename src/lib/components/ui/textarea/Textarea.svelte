@@ -3,6 +3,11 @@
   import { current_component } from "svelte/internal";
   import { getEventsAction } from "$lib/common/utils";
 
+  import Editor from '@tinymce/tinymce-svelte';
+
+  // Components
+  import Label from '../label/Label.svelte'
+
 	// Props
 	export let value: string|number = '';
 	export let label = "";
@@ -14,7 +19,6 @@
   const events = getEventsAction(current_component);
   const dispatch = createEventDispatcher();
 	const uuid = crypto.randomUUID();
-  let visible = false;
 
   // Methods
   /**
@@ -47,16 +51,16 @@
 
 <div class={`ui-element input-control-wrapper ${$$props.class || ''}`}>
   {#if label && label.length > 0}
-    <label
-      for={uuid}
-      class="block text-sm font-medium text-gray-700"
-    >
+    <Label for={uuid}>
       {label}
-    </label>
+    </Label>
   {/if}
-	<div class="mt-1 relative">
-    <textarea
-			id={uuid}
+  <div class="mt-1 relative">
+    <Editor
+      value={value}
+    />
+    <!-- <textarea
+      id={uuid}
       {rows}
       {disabled}
       bind:value={value}
@@ -66,7 +70,7 @@
       {...$$restProps}
       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
       use:events
-    ></textarea>
+    ></textarea> -->
 	</div>
   {#if errors}
     {#each errors as error }
