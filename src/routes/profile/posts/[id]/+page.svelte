@@ -119,6 +119,9 @@
 
       currencyList = currency_list.map((el: ICurrency) => ({...el, value: el.id, label: `${el.code} ${el.symbol}`}));
       currency = currencyList.find((el: ICurrency) => el.number === 949);
+      estate.currency_id = (!estate.currency_id)
+        ? currency.id
+        : estate.currency_id;
 
       rentTypeList = rent_type_list;
       estateTypeList = estate_type_list.map((el: any) => ({...el, value: el.id, label: el.title}));

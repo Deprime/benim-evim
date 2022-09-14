@@ -3,6 +3,6 @@
   @apply rounded-md;
 
   &-disabled {
-    opacity: 0.6;
+    @apply opacity-90 bg-slate-100;
   }
 }

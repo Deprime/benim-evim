@@ -49,7 +49,6 @@
               <li class:menu-item-active={isActive}>
                 <a
                   href={item.url}
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -69,7 +68,6 @@
                 <li class:menu-item-active={isActive}>
                   <a
                     href={item.url}
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                     tabindex="-1"
                   >
@@ -85,7 +83,6 @@
               <li>
                 <a
                   href={item.url}
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -134,15 +131,20 @@
         a {
           @apply block rounded-md;
           @apply my-1 px-3 py-2;
-          @apply text-gray-500 hover:text-gray-700;
+          @apply text-gray-500 text-sm;
           @apply transition-colors;
+
           &:hover {
-            @apply bg-gray-200;
+            @apply bg-slate-200;
           }
         }
         &.menu-item-active {
           a {
             @apply bg-blue-100 text-blue-700;
+
+            &:hover {
+              @apply bg-blue-100 text-blue-700;
+            }
           }
         }
       }

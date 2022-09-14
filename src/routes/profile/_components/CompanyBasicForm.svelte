@@ -196,17 +196,19 @@
     {/if}
 
     <section class="space-y-4">
-      <h4 class="font-medium border-b border-b-slate-200">
+      <h4 class="font-medium text-lg pb-2 border-b border-b-slate-100">
         Контакты
       </h4>
 
-      {#if form.errors.contacts}
-        <div>
+      <div>
+        {#if form.errors.contacts}
           <Alert variant="danger">
-            <p>Необходимо заполнить хотя-бы один контакт</p>
+            <p>Необходимо заполнить хотя бы один контакт</p>
           </Alert>
-        </div>
-      {/if}
+        {:else}
+          <p>Необходимо заполнить хотя бы один контакт</p>
+        {/if}
+      </div>
 
       {#if messenger_list.length > 0}
         <section>

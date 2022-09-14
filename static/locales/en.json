@@ -57,12 +57,15 @@
     "signup": {
       "title": "Registration by phone number",
       "enter_phone": "Enter your phone number",
-      "enter_sms_code": "Enter the SMS code",
+      "validation_code": "Validation code",
+      "enter_validation_code": "Enter the validation code",
       "enter_password": "Enter your password",
       "resend_timeout": "Resending after {seconds} seconds",
       "resend_code": "Send the code again",
       "get_code": "Get the code",
-      "forgot_password": "Forgot your password?"
+      "forgot_password": "Forgot your password?",
+      "flashcall_title": "You are about to receive a call",
+      "flachcall_text": "Enter the last 4 digits <br> of the incoming call"
     },
     "signup_email": {
       "title": "Registration by email",

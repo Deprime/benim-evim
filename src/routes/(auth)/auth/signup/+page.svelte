@@ -5,8 +5,8 @@
 	import { goto } from '$app/navigation';
 
   // Componetns
-  import { Input, Button, ButtonGroup, Label } from '$lib/components/ui';
-  import { Logo, CountryPrefixOption, CountryPrefixSelect } from '$lib/components/shared';
+  import { Input, Button, ButtonGroup, Label, Alert } from '$lib/components/ui';
+  import { Logo, CountryPrefixOption, CountryPrefixSelect, FlashCallNotification } from '$lib/components/shared';
 
   import { userApi, dictionaryApi } from '$lib/api';
   import { userStore } from '$lib/stores';
@@ -38,6 +38,13 @@
       return items[index].country
     }
     return "";
+  }
+
+  /**
+   * Change phone number
+   */
+  const changePhone = () => {
+    form.is_phone_valid = false;
   }
 
   /**
@@ -213,8 +220,17 @@
       <form class="space-y-6" on:submit|preventDefault={submit}>
         {#if form.validation_type === 0 }
           <div>
-            <Label for="phone">
+            <Label for="phone" class="flex flex-row justify-between">
               {$_('pages.profile.phone')}
+
+              {#if form.is_phone_valid && !form.is_phone_verified}
+                <span
+                  class="link"
+                  on:click={changePhone}
+                >
+                  {$_('actions.edit')}
+                </span>
+              {/if}
             </Label>
 
             <ButtonGroup class="w-full">
@@ -250,10 +266,13 @@
 
           {#if form.is_phone_valid && !form.is_phone_verified}
             <div>
+              <FlashCallNotification />
+            </div>
+            <div>
               <Input
                 class="w-full"
-                label="Validation code"
-                placeholder="Enter validation code"
+                label={$_('pages.signup.validation_code')}
+                placeholder={$_('pages.signup.enter_validation_code')}
                 type="number"
                 name="validation_code"
                 required
@@ -266,8 +285,8 @@
           {#if form.is_phone_verified}
             <div>
               <Input
-                label="Password"
-                placeholder="Enter your password"
+                label={$_('pages.profile.password')}
+                placeholder={$_('pages.signup.enter_password')}
                 type="password"
                 bind:value={form.password}
                 togglable
@@ -294,7 +313,7 @@
                 disabled={form.loading || form.validation_code.length !== 4}
                 loading={form.loading}
               >
-                {$_('actions.get_code')}
+                {$_('actions.confirm')}
               </Button>
             {/if}
             {#if !form.is_phone_valid}
@@ -304,7 +323,7 @@
                 disabled={form.loading}
                 loading={form.loading}
               >
-                {$_('actions.confirm')}
+                {$_('actions.get_code')}
               </Button>
             {/if}
           </div>

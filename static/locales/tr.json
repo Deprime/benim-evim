@@ -60,12 +60,15 @@
     "signup": {
       "title": "Telefon numarasına göre kayıt olun",
       "enter_phone": "Lütfen telefon numarasını belirtin",
-      "enter_sms_code": "Kodu sms'den girin",
+      "validation_code": "Doğrulama kodu",
+      "enter_validation_code": "Doğrulama kodunu girin",
       "enter_password": "Şifrenizi girin",
       "resend_timeout": "{seconds} saniye sonra tekrar gönderiliyor",
       "resend_code": "Kodu tekrar gönder",
       "get_code": "Kodu al",
-      "forgot_password": "Şifreyi unuttunuz mu?"
+      "forgot_password": "Şifreyi unuttunuz mu?",
+      "flashcall_title": "Şimdi size bir telefon gelecek",
+      "flachcall_text": "Gelen aramanın son 4 hanesini girin"
     },
     "signup_email": {
       "title": "E-posta ile kayıt olun",

@@ -37,7 +37,8 @@
   const getEstateUrl = (mode) => {
     return mode
       ? `/profile/posts/${estate.id}`
-      : `/posts/${estate.id}`;
+      : `#`;
+      // : `/posts/${estate.id}`;
   }
 </script>
 

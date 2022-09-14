@@ -65,6 +65,7 @@
             <CompanyBasicForm
               mode="update"
               show_info={false}
+              show_description={false}
               {company}
             />
           {/if}
