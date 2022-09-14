@@ -12,8 +12,8 @@ export const load = async ({ params }: any) => {
 
 
   try {
-    let posts = [];
     const url = `${API_URL}/api/${API_VERSION}/estate`
+    let posts = [];
 
     // const resp = await searchApi.list();
     const resp = await axios.get(url);
