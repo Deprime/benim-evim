@@ -44,7 +44,6 @@
           {#each menu as item}
             {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
             <a
-              sveltekit:prefetch
               class="menu-item"
               class:menu-item-active={isActive}
               href={item.url}
