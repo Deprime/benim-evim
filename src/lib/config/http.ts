@@ -14,7 +14,7 @@ if (DEBUG_MODE) {
 // Create a instance of axios
 const $axios = axios.create({
   withCredentials: true,
-  baseURL: `${API_URL}/api/${API_VERSION}/`
+  baseURL: `${API_URL}/api/${API_VERSION}`
 });
 
 /**

@@ -20,7 +20,7 @@
     <header class="py-6 px-4 lg:py-8 lg:px-0">
       <h1 class="pb-4 font-semibold text-2xl lg:text-3xl lg:leading-tight">
         <!-- {data.title} -->
-        Продажа квартир, таунхаусов, вилл в Турции
+        Продажа квартир, таунхаусов, домов и вилл в Турции
       </h1>
 
       <div class="flex flex-row justify-between lg:justify-start gap-2  text-sm lg:text-base">
@@ -34,7 +34,7 @@
     </header>
 
     <!-- <div class="mb-10">
-      {@html data.content}
+      {data.content}
     </div> -->
 
     <div class="flex flex-col lg:flex-row">

@@ -1,4 +1,4 @@
-export interface ICurrency {
+export default interface ICurrency {
   id: number,
   title: string,
   number: number,

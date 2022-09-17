@@ -13,7 +13,7 @@
   import { estateApi } from '$lib/api';
   import { getNotificationsContext } from 'svelte-notifications';
 
-  import type { ICurrency }  from '$lib/interfaces/currency';
+  import type { ICurrency } from '$lib/interfaces';
 
   // Props
   export let estate = {

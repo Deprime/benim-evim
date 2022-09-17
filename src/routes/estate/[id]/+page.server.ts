@@ -6,18 +6,18 @@ import { BASE_API_URL } from '$lib/helpers/url';
 
 /** @type {import('./$types').PageLoad} */
 export const load = async ({ params }: any) => {
+  const { id } = params;
 
   try {
-    const url = `${BASE_API_URL}/estate`
-    let posts = [];
+    const url = `${BASE_API_URL}/estate/${id}`
+    let post = {};
 
     const resp = await axios.get(url);
-    posts = resp.data;
+    post = resp.data;
 
     return {
-      title: 'Hello world!',
       content: url,
-      posts,
+      post,
     };
   }
   catch (err: any) {

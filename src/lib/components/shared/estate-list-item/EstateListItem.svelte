@@ -7,8 +7,10 @@
   import EstateGallery from './EstateGallery.svelte';
   import EstateStatus from './EstateStatus.svelte';
 
+  import type { IEstate } from '$lib/interfaces';
+
   // Props
-  export let estate;
+  export let estate: IEstate;
   export let editorMode = false;
 
   // Data
@@ -21,31 +23,36 @@
   $: estateUrl = getEstateUrl(editorMode);
 
   // Methods
-  const getEstateTitle = (mode) => {
+  /**
+   * Get estate title
+   */
+  const getEstateTitle = (mode: boolean): string => {
     if (estate.estate_type_id === 1) // Flat
       return `${estate.rent_type.title} ${estate.room_count}-комн. кв., ${estate.area} м², ${estate.level}/${estate.total_levels} этаж`;
 
-    if (estate.estate_type_id === 2) // Townhouse
-      return `${estate.rent_type.title} ${estate.estate_type.title} ${estate.room_count}-комн., ${estate.area} м², ${estate.total_levels} этаж`;
-
-    if (estate.estate_type_id === 3) // House
+    // Townhouse, House, Villa
+    // TODO: pluralize
+    if (estate.estate_type_id >= 2)
       return `${estate.rent_type.title} ${estate.estate_type.title} ${estate.room_count}-комн., ${estate.area} м², ${estate.total_levels} этаж`;
 
     return "";
   }
 
-  const getEstateUrl = (mode) => {
+  /**
+   * Get estate url
+   */
+  const getEstateUrl = (mode: boolean): string => {
     return mode
       ? `/profile/posts/${estate.id}`
-      : `#`;
-      // : `/posts/${estate.id}`;
+      : `/estate/${estate.id}`;
+      // : `#`;
   }
 </script>
 
 <div class="estate-card">
   <h2 class="estate-card-header estate-card-header--mobile">
     <a href={estateUrl}>
-      {estateTitle}
+      {estate.full_title}
     </a>
   </h2>
 
@@ -59,7 +66,7 @@
   <div class="estate-card-summary">
     <h2 class="estate-card-header">
       <a href={estateUrl}>
-        {estateTitle}
+        {estate.full_title}
       </a>
     </h2>
 
