@@ -106,7 +106,10 @@
           Автор:
         </div>
         <div class="text-sm">
-          {estate.author.first_name} ({estate.author.email})
+          {estate.author.first_name}
+          {#if estate.author?.email}
+            ({estate.author.email})
+          {/if}
         </div>
 
         <div class="pb-4 border-b border-dotted border-slate-200">

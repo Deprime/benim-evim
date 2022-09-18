@@ -16,7 +16,7 @@
   export let disabled = false;
   export let block    = false;
   export let type     = "button";
-  export let variant  = "primary";
+  export let variant: Variants = "primary";
   export let synthetic  = false;
 
   // Data

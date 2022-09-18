@@ -1,0 +1,34 @@
+.estate-main {
+  @apply flex flex-col lg:flex-row items-start lg:space-x-5;
+
+  .estate-text {
+    :global(br) {
+      @apply hidden;
+    }
+
+    :global(p) {
+      @apply pb-2;
+    }
+
+    :global(ul) {
+      @apply pl-2;
+    }
+
+    :global(ul li) {
+      @apply list-inside list-disc;
+    }
+  }
+}
+
+.estate-price {
+  @apply pb-4;
+  @apply flex flex-col;
+
+  &-total {
+    @apply font-semibold text-2xl;
+  }
+  &-meter {
+    @apply text-slate-500;
+    @apply pt-1;
+  }
+}

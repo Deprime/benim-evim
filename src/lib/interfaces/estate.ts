@@ -6,6 +6,7 @@ import type IBuilder from "./builder";
 import type IUser from "./user";
 import type ISettlement from "./settlement";
 import type IEstateStatus from "./estate-status";
+import type IPhoto from "./photo";
 
 export default interface IEstate {
   id: number,
@@ -46,4 +47,5 @@ export default interface IEstate {
   settlement: ISettlement,
   status: IEstateStatus,
   currency: ICurrency,
+  photos: [IPhoto],
 }

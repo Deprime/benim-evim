@@ -1,0 +1,18 @@
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #555 #fff;
+
+  &::-webkit-scrollbar {
+    @apply md:h-4 md:w-4;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-full bg-white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply md:bg-slate-900 md:bg-opacity-20 md:hover:bg-opacity-50;
+    @apply md:border-[4px] md:border-solid md:border-white;
+    @apply rounded-full;
+  }
+}

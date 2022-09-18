@@ -5,6 +5,7 @@ const PREFIX = "app/estate";
 const photoApi = {
   /**
    * List
+   * FIXME: add contract
    */
   list: (estate_id: number): Promise<any> => {
     const url = `${PREFIX}/${estate_id}/photos`;
@@ -18,6 +19,14 @@ const photoApi = {
   create: (estate_id: number, data: any): Promise<any> => {
     const url = `${PREFIX}/${estate_id}/photos`;
     return $axios.post(url, data, {headers: { "Content-Type": "multipart/form-data" }})
+  },
+
+  /**
+   * Set as poster
+   */
+  setPoster: (estate_id: number, photo_id: number, ): Promise<any> => {
+    const url = `${PREFIX}/${estate_id}/photos/${photo_id}`;
+    return $axios.put(url)
   },
 }
 

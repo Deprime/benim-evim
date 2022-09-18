@@ -7,7 +7,14 @@
 
   // Data
   const defaultUrl = '/pics/1.jpg';
-  let posterUrl = defaultUrl;
+  const poster = estate.photos?.find(el => el.is_poster);
+  let posterUrl = (poster)
+    ? `${CDN_URL}/${poster.url}`
+    : (estate.photos?.length > 0)
+      ? `${CDN_URL}/${estate.photos[0].url}`
+      : defaultUrl;
+
+  const defaultPosterUrl = posterUrl;
 
   // Methods
   const onMouseEnter = (event) => {
@@ -15,7 +22,7 @@
   }
 
   const onMouseLeave = (event) => {
-    posterUrl = defaultUrl;
+    posterUrl = defaultPosterUrl;
   }
 </script>
 
@@ -23,12 +30,12 @@
   <div class="estate-card-gallery-poster">
     {#if estate.photos?.length > 0}
       <img
-        src={`${CDN_URL}/${estate.photos[0].url}`}
+        src={posterUrl}
         alt="Real estate"
       >
       {#if editorMode}
         <span class="estate-card-picture-counter">
-          + {estate.photos.length - 1} фото
+          + {estate.photos?.length - 1} фото
         </span>
       {/if}
     {:else}
@@ -38,22 +45,22 @@
       >
     {/if}
   </div>
-  <!-- src={`${CDN_URL}/${photo.url}`} -->
 
   {#if !editorMode}
     <div class="grid gap-2 grid-cols-3">
-      {#each [...Array(3).keys()] as key}
-        <div class="overflow-hidden cursor-pointer hover:opacity-80">
-          <img
-            src={`/pics/${key + 2}.jpg`}
-            alt="Real estate"
-            class="h-full rounded-md"
-            on:mouseenter={onMouseEnter}
-            on:mouseleave={onMouseLeave}
-          >
-
-        </div>
-      {/each}
+      {#if estate.photos}
+        {#each estate.photos.slice(0, 3) as photo}
+            <div class="overflow-hidden cursor-pointer hover:opacity-80">
+              <img
+                src={`${CDN_URL}/${photo.url}`}
+                alt="Real estate"
+                class="h-full rounded-md"
+                on:mouseenter={onMouseEnter}
+                on:mouseleave={onMouseLeave}
+              >
+            </div>
+          {/each}
+      {/if}
     </div>
   {/if}
 </div>

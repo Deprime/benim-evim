@@ -13,6 +13,8 @@
   export let editorMode = false;
   export let height = "400px";
 
+  export let hasSearchControl = true;
+
   export let marker: IMapMarker | null = null;
   export let markerList: [IMapMarker] = [];
   export let updateTinker = 0;
@@ -62,15 +64,19 @@
    */
   const createMarker = ($$marker: IMapMarker) => {
     const coords = $$marker.coords;
-    const balloon = {
-      balloonContent: $$marker.title
-    };
+
     const options = {
-      preset: 'islands#blueDotIcon',
+      preset: $$marker.iconContent ? 'islands#blackStretchyIcon' : 'islands#blueDotIcon',
       draggable: editorMode,
     };
 
+    const balloon = {
+      balloonContent: $$marker.title,
+      iconContent: $$marker.iconContent,
+    };
+
     const placemark = new ymaps.Placemark(coords, balloon, options);
+
 
     // If editorMode true
     if (editorMode) {
@@ -95,11 +101,21 @@
    * Load map
    */
   const loadMap = () => {
+    const controls = [
+      'zoomControl',
+      'fullscreenControl',
+    ];
+
+    if (hasSearchControl) {
+      controls.push('searchControl')
+    }
+
     theMap = new ymaps.Map(uuid, {
-      center: center,
-      zoom: zoom,
-      controls: ['zoomControl', 'searchControl', 'fullscreenControl']
+      center,
+      zoom,
+      controls,
     });
+
     try {
       // theMap.behaviors.disable('scrollZoom');
     }

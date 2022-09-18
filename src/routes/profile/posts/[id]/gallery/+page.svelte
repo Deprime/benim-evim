@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { _ } from '$lib/config/i18n';
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
   import { XIcon } from 'svelte-feather-icons'
 
   // Componetns
-  import { Button, Input, Label, Alert } from '$lib/components/ui';
+  import { Button, Spinner } from '$lib/components/ui';
   import { PageHeader } from '$lib/components/shared';
   import NavTabs from '../../_components/NavTabs.svelte';
   // import PhotoUploader from './_components/PhotoUploader.svelte';
@@ -15,18 +14,12 @@
   import { estateApi, photoApi } from '$lib/api';
   import { getNotificationsContext } from 'svelte-notifications';
 
+  import type { IEstate } from '$lib/interfaces';
+
   const CDN_URL = import.meta.env.VITE_CDN_URL;
 
   // Props
-  export let estate = {
-    price: 0,
-    settlement_id: null,
-    rent_type_id: 1,
-    estate_type_id: 1,
-    currency_id: 1,
-    coords: [],
-    updateTinker: 0,
-  };
+  export let estate: IEstate;
 
   // Data
   let { params } = $page;
@@ -36,12 +29,13 @@
   let errors = {};
 
   let loading = true;
+  let uploading = false;
   let form = {
     loading: false,
     errors: {}
   };
-  let photos;
-  let photoList = []
+  let photos: any;
+  let photoList: any = []
 
   // Methods
   /**
@@ -63,27 +57,24 @@
   }
 
   /**
-   * Load editor data
+   * Set photo as a poster
    */
-  const setPoster = async (photo, index: number) => {
-    photoList = photoList.map(el => {
-      el.is_poster = 0;
-      return el;
-    });
-    photoList[index].is_poster = 1;
-
-    // loading = true;
-    // try {
-    //   const response = await photoApi.list(estate_id);
-    //   photoList = response.data;
-    // }
-    // catch (error: any) {
-    //   errors = error.response?.data || {};
-    //   throw new Error(error)
-    // }
-    // finally {
-    //   loading = false;
-    // }
+  const setPoster = async (photo: any, index: number) => {
+    try {
+      await photoApi.setPoster(id, photo.id);
+      photoList = photoList.map((el: any) => {
+        el.is_poster = 0;
+        return el;
+      });
+      photoList[index].is_poster = 1;
+    }
+    catch (error: any) {
+      errors = error.response?.data || {};
+      throw new Error(error)
+    }
+    finally {
+      loading = false;
+    }
   }
 
   /**
@@ -107,7 +98,8 @@
   /**
    * On file change
    */
-  const onFileChange = async (e: Event): void => {
+  const onFileChange = async (e: Event): Promise<any> => {
+    uploading = true;
     try {
       const file_list = getFileListFromEvent(e);
       const files_arr = getNativeArrayFromFileList(file_list);
@@ -124,7 +116,7 @@
       throw new Error(error)
     }
     finally {
-      loading = false;
+      uploading = false;
     }
   };
 
@@ -136,7 +128,7 @@
   /**
    * Get native array from file list
    */
-  const getNativeArrayFromFileList = (file_list) => Object.values(file_list);
+  const getNativeArrayFromFileList = (file_list: any) => Object.values(file_list);
 
   onMount(async () => {
     if (Number.isInteger(id)) {
@@ -164,17 +156,19 @@
     {#if !loading}
       <section class="editor-body">
         <div>
-          <input
-            type="file"
-            multiple
-            accept="image/png, image/jpeg"
-            bind:files={photos}
-            on:change={e => onFileChange(e)}
-          />
-          <!-- <PhotoUploader /> -->
+          {#key uploading}
+            <input
+              multiple
+              type="file"
+              accept="image/png, image/jpeg"
+              bind:files={photos}
+              on:change={e => onFileChange(e)}
+              disabled={uploading}
+            />
+          {/key}
         </div>
 
-        <div class="flex flex-row space-x-4">
+        <div class="flex flex-row space-x-4 relative">
           <div class="grid grid-cols-4 gap-4">
             {#each photoList as photo, index}
               <div class="image-item">
@@ -199,11 +193,22 @@
               </div>
             {/each}
           </div>
+
+          {#if uploading}
+            <div class="absolute w-full top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center">
+              <Spinner variant="primary" />
+            </div>
+          {/if}
         </div>
       </section>
     {:else}
-      <div class="py-16 flex content-center justify-center">
-        Загрузка
+      <div class="py-16 space-y-6 flex flex-col items-center justify-center">
+        <h4>
+          Загрузка
+        </h4>
+        <div class="relative">
+          <Spinner variant="primary" />
+        </div>
       </div>
     {/if}
 
@@ -220,7 +225,6 @@
 
 </div>
 
-
 <style lang="scss">
   .editor-body {
     @apply space-y-6 bg-white px-4 py-5 sm:p-6
@@ -228,6 +232,7 @@
 
   .image-item {
     @apply overflow-hidden h-36 rounded-md relative;
+    @apply bg-slate-100;
 
     &-action {
       @apply absolute;
