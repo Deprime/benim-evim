@@ -1,21 +1,21 @@
 .estate-main {
   @apply flex flex-col lg:flex-row items-start lg:space-x-5;
 
-  .estate-text {
+  .estate-description {
     :global(br) {
       @apply hidden;
     }
 
     :global(p) {
-      @apply pb-2;
+      @apply pb-2 text-sm;
     }
 
     :global(ul) {
-      @apply pl-2;
+      @apply pl-2 text-sm;
     }
 
     :global(ul li) {
-      @apply list-inside list-disc;
+      @apply list-inside list-disc text-sm;
     }
   }
 }

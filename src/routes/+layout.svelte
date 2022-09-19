@@ -1,10 +1,12 @@
 <script lang="ts">
 	import '../app.scss';
+
   import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
   // Components
   import { Navigation, Footer } from '$lib/components/structure';
+  import { Toaster } from 'svelte-french-toast'
   import Notifications from 'svelte-notifications';
 
   // Serivces
@@ -46,6 +48,8 @@
           <slot />
         </main>
         <Footer />
+
+        <Toaster />
       </div>
     </Notifications>
   {/if}
