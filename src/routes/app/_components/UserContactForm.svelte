@@ -77,7 +77,7 @@
       await companyApi.create(company);
       await userService.getProfile();
 
-      goto('/profile/company');
+      goto('/app/company');
     }
     catch (error: any) {
       company.contacts = [];
@@ -239,24 +239,6 @@
         </section>
       {/if}
     </section>
-  </div>
-
-  <div class={show_info ? "md:w-5/12" : "md:w-1/3"}>
-    {#if show_info}
-      <div class="pl-6">
-        <Alert variant="info">
-          <p class="mb-2">
-            {$_('company_creator.desc1')}
-          </p>
-          <p class="mb-2">
-            {$_('company_creator.desc2')}
-          </p>
-          <p class="mb-2">
-            {$_('company_creator.desc3')}
-          </p>
-        </Alert>
-      </div>
-    {/if}
   </div>
 </form>
 

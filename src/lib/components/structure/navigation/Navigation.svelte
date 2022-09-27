@@ -4,14 +4,18 @@
   import { _ } from '$lib/config/i18n';
   import { goto } from '$app/navigation';
 
+  // Components
   import { Logo } from '$lib/components/shared';
+  import { UserIcon } from 'svelte-feather-icons';
+  import LanguageSwitcher from './LanguageSwitcher.svelte';
+
+  // Stores
   import { userStore } from '$lib/stores';
 
+  // Data
+  let visible = false;
   const menu = [
     {url: '/', key: 'home', default: 'Home'},
-    // {url: '/about', key: 'about', default: 'About', compare: null},
-    // {url: '/todos', key: 'todos', default: 'Todos', compare: null},
-    // {url: '/posts', key: 'posts', default: 'Posts', compare: '/posts'},
   ];
 
   const authMenu = [
@@ -21,12 +25,10 @@
 
   const profileMenu = {
     list: [
-      {url: '/profile', key: 'profile', default: 'Your Profile'},
+      {url: '/app/profile', key: 'profile', default: 'Your Profile'},
     ],
     visible: false,
   }
-
-  let visible = false;
 </script>
 
 <nav class="bg-white shadow relative">
@@ -93,6 +95,10 @@
 
       <!-- Profile icon desktop -->
       <div class="hidden lg:ml-4 lg:flex lg:items-center">
+        <div class="flex flex-row">
+          <LanguageSwitcher />
+        </div>
+
         <div class="relative ml-4 flex-shrink-0">
           {#if $userStore.token}
             <div>
@@ -101,16 +107,12 @@
                 type="button"
                 aria-expanded="false"
                 aria-haspopup="true"
-                on:click={() => {goto('/profile')}}
+                on:click={() => {goto('/app/profile')}}
               >
                 <span class="sr-only">
                   Open user menu
                 </span>
-                <img
-                  class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                >
+                <UserIcon size="18" />
               </button>
             </div>
           {/if}
@@ -138,10 +140,10 @@
 
     {#if browser && $userStore?.token}
       <!-- Mobile nav menu -->
-      <section class="border-t border-gray-200 pt-4 pb-3">
+      <section class="border-t border-gray-200 shadow-lg pt-4 pb-3">
         <div class="flex items-center px-4">
-          <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+          <div class="rounded-full bg-blue-500 h-8 w-8 text-white flex flex-shrink-0 justify-center items-center ">
+            <UserIcon />
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-gray-800">
@@ -169,7 +171,6 @@
         </nav>
       </section>
     {/if}
-
   </div>
 </nav>
 
@@ -199,7 +200,10 @@
   }
 
   .profile-avatar {
-    @apply flex rounded-full bg-white text-sm;
+    @apply flex justify-center items-center;
+    @apply rounded-full;
     @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply h-7 w-7;
+    @apply bg-blue-600 text-white;
   }
 </style>

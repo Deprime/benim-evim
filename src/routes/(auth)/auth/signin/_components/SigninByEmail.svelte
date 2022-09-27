@@ -27,7 +27,7 @@
 
       userStore.setData(response.data);
       form.errors = {};
-      goto('/profile')
+      goto('/app/profile')
     }
     catch (error: any) {
       form.errors = error.response?.data || {};

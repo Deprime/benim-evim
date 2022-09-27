@@ -101,7 +101,7 @@
       userStore.setToken(token);
       userStore.setData(user);
       form.errors = {};
-      goto('/profile')
+      goto('/app/profile')
     }
     catch (error: any) {
       form.errors = error.response?.data || {};

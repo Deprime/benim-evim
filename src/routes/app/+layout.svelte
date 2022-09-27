@@ -3,24 +3,72 @@
 	import { page } from '$app/stores';
   import { browser } from '$app/environment';
 
-  import { UserIcon } from 'svelte-feather-icons'
+  import { UserIcon, BoxIcon, SlidersIcon } from 'svelte-feather-icons'
   import { userStore } from '$lib/stores';
 
-  // Data
-  const profileMenu = [
-    {url: '/profile', key: 'profile', default: 'Your Profile'},
-    {url: '/profile/security', key: 'security', default: 'Security'},
-    {url: '/profile/favorites', key: 'favorites', default: 'Favorites'},
-  ];
+  interface IMenuItem {
+    url: string,
+    compare?: string,
+    key: string,
+    default: string,
+  }
 
-  const companyMenu = [
-    {url: '/profile/company', key: 'company', default: 'Company'},
-    {url: '/profile/posts', compare: '/profile/posts', key: 'posts', default: 'Posts'},
+  // Data
+  const adminMenu = [
+    {url: '/app/companies', key: 'companies', default: 'Компании'},
+    // {url: '/app/users', key: 'users', default: 'Пользователи'},
   ];
 
   const defaultMenu = [
     {url: '/auth/signout', key: 'signout', default: 'Sign out'}
   ];
+
+  // Reactive
+  $: profileMenu = getProfileMenu($userStore.data?.realtor_accesses);
+  $: companyMenu = getCompanyMenu($userStore.data?.is_head);
+
+  // Methods
+  /**
+   * Get Company menu
+   */
+  const getCompanyMenu = (is_head = false): IMenuItem[] => {
+    const menu = [
+      {url: '/app/posts', compare: '/app/posts', key: 'posts', default: 'Posts'},
+      {url: '/app/company/access-request', compare: '/app/company/access-request', key: 'access_requests', default: 'Access requests'},
+    ];
+
+    if (is_head) {
+      const companyItem = {
+        url: '/app/company',
+        // compare: '/app/company',
+        key: 'company',
+        default: 'Company'
+      };
+      menu.push(companyItem);
+    }
+    return menu;
+  }
+
+  /**
+   * Get profile menu
+   */
+  const getProfileMenu = (realtor_accesses = []): IMenuItem[] => {
+    const menu = [
+      {url: '/app/profile', key: 'profile', default: 'Your Profile'},
+      {url: '/app/profile/security', key: 'security', default: 'Security'},
+      {url: '/app/profile/favorites', key: 'favorites', default: 'Favorites'},
+    ];
+
+    if (realtor_accesses && realtor_accesses.length > 0) {
+      const requesItem = {
+        url: '/app/profile/access-request',
+        key: 'access_requests',
+        default: 'Access requests'
+      };
+      menu.push(requesItem);
+    }
+    return menu;
+  }
 </script>
 
 {#if browser}
@@ -40,9 +88,13 @@
         </div>
 
         <nav class="profile-navigation">
+          <!-- Profile menu -->
           <ul>
             <li class="menu-title">
-              {$_(`pages.profile.title`)}
+              <UserIcon size="20" />
+              <span class="pl-2 inline-block">
+                {$_(`pages.profile.title`)}
+              </span>
             </li>
             {#each profileMenu as item}
               {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
@@ -59,9 +111,13 @@
           </ul>
 
           {#if $userStore.data.company_id}
+            <!-- Company menu -->
             <ul>
               <li class="menu-title">
-                {$_(`pages.company.title`)}
+                <BoxIcon size="20" />
+                <span class="pl-2 inline-block">
+                  {$_(`pages.company.title`)}
+                </span>
               </li>
               {#each companyMenu as item}
                 {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
@@ -78,6 +134,32 @@
             </ul>
           {/if}
 
+
+          {#if $userStore.data.role === "dementor"}
+            <!-- Admin menu -->
+            <ul>
+              <li class="menu-title">
+                <SlidersIcon size="20" />
+                <span class="pl-2 inline-block">
+                  Управление
+                </span>
+              </li>
+              {#each adminMenu as item}
+                {@const isActive = item.compare ? $page.url.pathname.includes(item.compare) : $page.url.pathname === item.url}
+                <li class:menu-item-active={isActive}>
+                  <a
+                    href={item.url}
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    {$_(`pages.${item.key}.title`, {default: item.default})}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+
+          <!-- Other menu -->
           <ul>
             {#each defaultMenu as item}
               <li>
@@ -125,7 +207,8 @@
         @apply block;
 
         &.menu-title {
-          @apply text-slate-900 pb-2 pl-3;
+          @apply flex flex-row items-center;
+          @apply text-slate-900 pb-2;
         }
 
         a {

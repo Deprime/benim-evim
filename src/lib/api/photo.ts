@@ -22,9 +22,18 @@ const photoApi = {
   },
 
   /**
+   * Create company
+   * FIXME: add contract
+   */
+  remove: (estate_id: number, photo_id: number): Promise<any> => {
+    const url = `${PREFIX}/${estate_id}/photos/${photo_id}`;
+    return $axios.delete(url)
+  },
+
+  /**
    * Set as poster
    */
-  setPoster: (estate_id: number, photo_id: number, ): Promise<any> => {
+  setPoster: (estate_id: number, photo_id: number): Promise<any> => {
     const url = `${PREFIX}/${estate_id}/photos/${photo_id}`;
     return $axios.put(url)
   },

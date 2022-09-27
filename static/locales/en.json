@@ -19,6 +19,13 @@
     "get_code": "Get the code",
     "confirm": "Confirm"
   },
+
+  "statuses": {
+    "sent": "Awaiting review",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+
   "errors": {
     "auth_by_phone": "Incorrect phone or password",
     "auth_by_email": "Incorrect email or password"
@@ -29,6 +36,9 @@
     },
     "favorites": {
       "title": "Favorites"
+    },
+    "access_requests": {
+      "title": "Access requests"
     },
     "security": {
       "title": "Security",
@@ -85,14 +95,8 @@
       "chats": "Chats",
       "message": "Message"
     },
-    "map": {
-      "title": "Event map"
-    },
-    "event": {
-      "title": "Events",
-      "to_posting": "Go to publication",
-      "settings": "Publishing settings"
-    },
+
+
     "profile": {
       "title": "Profile",
       "user_data": "Personal data",
@@ -107,27 +111,41 @@
       "language": "Language",
       "delete_account": "Delete account"
     },
-    "filters": {
-      "title": "Filters",
-      "category": "Category",
-      "all_categories": "All categories",
-      "event_date": "Event date",
-      "today": "Today",
-      "tomorrow": "Tomorrow",
-      "after_week": "After week",
-      "time_start": "Start time",
-      "start": "Start",
-      "end": "End",
-      "address": "Event address",
-      "reset": "Reset filters",
-      "show_events": "Show {count} events"
-    },
 
-    "company_creator": {
-      "title": "Company registration",
-      "desc1": "Let's quickly register your company.",
-      "desc2": "Fill in the Company Name, Address and any of the messengers.",
-      "desc3": "The more information you fill out, the easier it will be for the client to contact you."
+    "company-connection": {
+      "title": "Information for connecting a real estate agency",
+      "subtitle": "Connection procedure",
+      "text0": "Register as a regular user",
+      "text1": "To connect a real estate agency, you need to send a request",
+      "text2": "Specify the information",
+      "text3": "The request is considered no more than 24 hours. The result of the request will be sent to your email.",
+      "item1": "Request address:",
+      "item2": "Topic:",
+      "item3": "Connection",
+      "item4": "Agency name",
+      "item5": "Contact phone number (mobile) specified during registration",
+      "item6": "City of the main office",
+      "item7": "License for the activity of a real estate agency"
     }
+  },
+
+  "connection_info": {
+    "realtor": {
+      "title": "I'm a realtor",
+      "text1": "To place ads, a realtor needs to be an employee of a real estate agency.",
+      "text2": "Select the agency you work for from the list and send a connection request.",
+      "button": "List of real estate agencies"
+    },
+    "no_agency": {
+      "title": "What if my agency is not on the list?",
+      "text1": "It is necessary to send <a href='/company-connection' target='_blank'>a request</a> to connect your agency."
+    }
+  },
+
+  "company_creator": {
+    "title": "Company registration",
+    "desc1": "Let's quickly register your company.",
+    "desc2": "Fill in the Company Name, Address and any of the messengers.",
+    "desc3": "The more information you fill out, the easier it will be for the client to contact you."
   }
 }

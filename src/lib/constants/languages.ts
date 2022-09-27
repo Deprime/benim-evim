@@ -13,10 +13,10 @@ export const LANGUAGE_LIST = [
     native_title: 'Türk',
     icon: 'tr.svg',
   },
-  {
-    locale: 'en',
-    title: 'English',
-    native_title: 'English',
-    icon: 'en.svg',
-  },
+  // {
+  //   locale: 'en',
+  //   title: 'English',
+  //   native_title: 'English',
+  //   icon: 'en.svg',
+  // },
 ];

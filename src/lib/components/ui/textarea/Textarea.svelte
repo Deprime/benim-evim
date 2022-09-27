@@ -3,7 +3,7 @@
   import { current_component } from "svelte/internal";
   import { getEventsAction } from "$lib/common/utils";
 
-  import Editor from '@tinymce/tinymce-svelte';
+  // import Editor from '@tinymce/tinymce-svelte';
 
   // Components
   import Label from '../label/Label.svelte'
@@ -56,10 +56,7 @@
     </Label>
   {/if}
   <div class="mt-1 relative">
-    <Editor
-      value={value}
-    />
-    <!-- <textarea
+    <textarea
       id={uuid}
       {rows}
       {disabled}
@@ -70,7 +67,7 @@
       {...$$restProps}
       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
       use:events
-    ></textarea> -->
+    ></textarea>
 	</div>
   {#if errors}
     {#each errors as error }

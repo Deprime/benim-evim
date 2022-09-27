@@ -179,7 +179,7 @@
       else {
         const response = await estateApi.create($$estate);
         const $$estate_id = response.data.id;
-        goto(`/profile/posts/${$$estate_id}/gallery`);
+        goto(`/app/posts/${$$estate_id}/gallery`);
       }
     }
     catch (error: any) {

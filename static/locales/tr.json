@@ -17,7 +17,15 @@
     "logout": "Çıkmak",
     "signout": "Çıkmak",
     "get_code": "Kodu al",
-    "confirm": "Onaylamak"
+    "confirm": "Onaylamak",
+    "approve": "Onaylamak",
+    "reject": "Reddet"
+  },
+
+  "statuses": {
+    "sent": "İncelemeyi bekliyor",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi"
   },
 
   "errors": {
@@ -31,6 +39,11 @@
     },
     "favorites": {
       "title": "Seçkin"
+    },
+    "access_requests": {
+      "title": "Erişim İstekleri",
+      "title2": "Erişim taleplerim",
+      "reject_reason": "Reddetme nedeni"
     },
     "security": {
       "title": "Güvenlik",
@@ -52,10 +65,10 @@
     },
 
     "terms": {
-      "title": "Условиями обслуживания"
+      "title": "Hizmet Şartları"
     },
     "privacy": {
-      "title": "Политике конфеденциальности"
+      "title": "Gizlilik Politikası"
     },
     "signup": {
       "title": "Telefon numarasına göre kayıt olun",
@@ -88,14 +101,8 @@
       "chats": "Чаты",
       "message": "Сообщение"
     },
-    "map": {
-      "title": "Карта встреч"
-    },
-    "event": {
-      "title": "Встречи",
-      "to_posting": "Перейти к публикации",
-      "settings": "Настройки публикации"
-    },
+
+
     "profile": {
       "title": "Profil",
       "user_data": "Kişisel Veriler",
@@ -110,27 +117,41 @@
       "language": "Dil",
       "delete_account": "Hesabı sil"
     },
-    "filters": {
-      "title": "Фильтры",
-      "category": "Категория",
-      "all_categories": "Все категории",
-      "event_date": "Дата проведения",
-      "today": "Сегодня",
-      "tomorrow": "Завтра",
-      "after_week": "Через неделю",
-      "time_start": "Время начала",
-      "start": "Начало",
-      "end": "Конец",
-      "address": "Адрес встречи",
-      "reset": "Сбросить фильтр",
-      "show_events": "Показать {count} встречи"
-    },
 
-    "company_creator": {
-      "title": "Şirket Kaydı",
-      "desc1": "Şirketinizi hızlı bir şekilde kaydedelim.",
-      "desc2": "Şirket Adını, Adresini ve habercilerden herhangi birini doldurun.",
-      "desc3": "Ne kadar çok bilgi doldurursanız, müşterinin sizinle iletişim kurması o kadar kolay olur."
+    "company-connection": {
+      "title": "Emlak acentesini bağlamak için bilgiler",
+      "subtitle": "Bağlantı sırası",
+      "text0": "Normal kullanıcı olarak kayıt olun",
+      "text1": "Bir emlak acentesini bağlamak için ihtiyacınız olan şey",
+      "text2": "Bilgileri belirtin",
+      "text3": "Talep 24 saatten fazla sürmez. Sorgunun sonucu e-postanıza yönlendirilecektir.",
+      "item1": "Adrese e-posta gönder:",
+      "item2": "Tema:",
+      "item3": "Bağlanma",
+      "item4": "Ajansın adı",
+      "item5": "Kayıt sırasında belirtilen irtibat telefon numarası (cep telefonu)",
+      "item6": "Ana ofis şehri",
+      "item7": "Emlakçıyı işletmek için lisans"
     }
+  },
+
+  "connection_info": {
+    "realtor": {
+      "title": "Ben emlakçıyım",
+      "text1": "Reklamları yerleştirmek için emlakçının bir emlakçının çalışanı olması gerekir.",
+      "text2": "Listeden çalıştığınız ajansı seçin ve bir bağlantı isteği gönderin.",
+      "button": "Emlakçıların listesi"
+    },
+    "no_agency": {
+      "title": "Ya ajansım listede değilse?",
+      "text1": "Ajansınızın bağlantısı <a href='/company-connection' target='_blank'>için bir talep göndermeniz gerekir</a>."
+    }
+  },
+
+  "company_creator": {
+    "title": "Şirket Kaydı",
+    "desc1": "Şirketinizi hızlı bir şekilde kaydedelim.",
+    "desc2": "Şirket Adını, Adresini ve habercilerden herhangi birini doldurun.",
+    "desc3": "Ne kadar çok bilgi doldurursanız, müşterinin sizinle iletişim kurması o kadar kolay olur."
   }
 }

@@ -15,8 +15,8 @@
   const getMenu = ($$id: string | number) => {
     const disabled = !Number.isInteger(parsedId);
     const list = [
-      {url: `/profile/posts/${$$id}`, key: 'editor', default: 'Информация', disabled},
-      {url: `/profile/posts/${$$id}/gallery`, key: 'gallery', default: 'Галерея', disabled},
+      {url: `/app/posts/${$$id}`, key: 'editor', default: 'Информация', disabled},
+      {url: `/app/posts/${$$id}/gallery`, key: 'gallery', default: 'Галерея', disabled},
     ];
 
     return list;

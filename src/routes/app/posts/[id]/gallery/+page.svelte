@@ -39,9 +39,9 @@
 
   // Methods
   /**
-   * Load editor data
+   * Load photo list
    */
-  const loatPhotos = async (estate_id: number) => {
+  const loadPhotos = async (estate_id: number) => {
     loading = true;
     try {
       const response = await photoApi.list(estate_id);
@@ -78,13 +78,13 @@
   }
 
   /**
-   * Load editor data
+   * Remove editor data
    */
-  const remove = async (estate_id: number) => {
+  const remove = async (photo_id: number) => {
     loading = true;
     try {
-      const response = await photoApi.list(estate_id);
-      photoList = response.data;
+      await photoApi.remove(id, photo_id);
+      await loadPhotos(id);
     }
     catch (error: any) {
       errors = error.response?.data || {};
@@ -105,11 +105,13 @@
       const files_arr = getNativeArrayFromFileList(file_list);
 
       const payload = new FormData();
-      files_arr.forEach((file, i) => {
-        payload.append(`photos[]`, file);
+
+      files_arr.forEach((file: any, i) => {
+        payload.append(`photos[${i}]`, file);
       });
+
       await photoApi.create(id, payload);
-      loatPhotos(id);
+      loadPhotos(id);
     }
     catch (error: any) {
       errors = error.response?.data || {};
@@ -132,7 +134,7 @@
 
   onMount(async () => {
     if (Number.isInteger(id)) {
-      await loatPhotos(id);
+      await loadPhotos(id);
     }
   })
 </script>
@@ -186,7 +188,7 @@
                 </span>
                 <span
                   class="image-item-action image-item-remove"
-                  on:click={() => remove(photo, index)}
+                  on:click={() => remove(photo.id)}
                 >
                   <XIcon size="12" />
                 </span>

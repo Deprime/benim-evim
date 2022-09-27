@@ -1,5 +1,7 @@
 export { default as Checkbox } from './checkbox/Checkbox.svelte';
 export { default as Label } from './label/Label.svelte';
+export { default as ErrorNotification } from './error-notification/ErrorNotification.svelte';
+
 export { default as Input } from './input/Input.svelte';
 export { default as Textarea } from './textarea/Textarea.svelte';
 export { default as Editor } from './editor/Editor.svelte';

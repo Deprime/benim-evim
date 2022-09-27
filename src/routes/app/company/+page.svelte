@@ -4,13 +4,13 @@
 
 	// import Counter from '$lib/Counter.svelte';
   // Componetns
-  import { Checkbox, Input, Button } from '$lib/components/ui';
+  // import { Checkbox, Input, Button } from '$lib/components/ui';
   import { PageHeader } from '$lib/components/shared';
   import CompanyBasicForm from '../_components/CompanyBasicForm.svelte';
 
   // Services
-  import { userService } from '$lib/services';
-  import { dictionaryApi, companyApi } from '$lib/api';
+  // import { userService } from '$lib/services';
+  import { companyApi } from '$lib/api';
 
   // Data
   const form = {
@@ -65,7 +65,7 @@
             <CompanyBasicForm
               mode="update"
               show_info={false}
-              show_description={false}
+              show_description
               {company}
             />
           {/if}

@@ -9,6 +9,7 @@
   export let visible = false;
 	export let title = "";
 	export let closable = true;
+  export let size:  "xs" | "sm" | "md" | "lg" | "xl" = "md"
 
   // Data
 	const dispatch = createEventDispatcher();
@@ -25,7 +26,7 @@
 {#if visible}
   <Overlay >
     <div
-      class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 lg:w-6/12"
+      class={`modal modal-size-${size}`}
       transition:fade={{ duration: 300 }}
     >
       <header class="relative px-6 py-4">
@@ -63,4 +64,7 @@
 
 <style lang="scss">
   @import './Modal.scss';
+
+
+  // .
 </style>

@@ -5,17 +5,17 @@
 
   // Componetns
   import { Input, Button, Label, Modal } from '$lib/components/ui';
-  import { PageHeader  } from '$lib/components/shared';
-  import CompanyBasicForm from './_components/CompanyBasicForm.svelte';
+  import { PageHeader } from '$lib/components/shared';
+  import RealtorAlert from '../_components/RealtorAlert.svelte';
+  import CompanySelectionForm from '../_components/CompanySelectionForm.svelte';
 
+  // Services
   import { userStore } from '$lib/stores';
   import { dictionaryApi, userApi } from '$lib/api';
   import { userService } from '$lib/services';
 
   // Data
-  let show_creator = false;
-  let create_company = false;
-
+  let show_company_list = false;
   let prefix_list: any = [];
   const user: any = {};
   const form = {
@@ -59,6 +59,20 @@
     }
   }
 
+  /**
+   * Refresh profile
+   */
+  const refresh = async () => {
+    show_company_list = false;
+    form.loading = true;
+    try {
+      await userService.getProfile();
+    }
+    finally {
+      form.loading = false;
+    }
+  }
+
   onMount(async () => {
     await getPrefixList();
     const data = $userStore.data;
@@ -94,22 +108,6 @@
               />
             </div>
 
-            {#if $userStore.data && !$userStore.data.company_id}
-              <div class="w-2/3 border-t border-t-slate-200 border-b border-b-slate-200">
-                <div class="py-6">
-                  <p class="pb-4">
-                    Если вы хотите размещать объявления на сайте и оказывать услуги риэлтора, зарегистрируйте свою компанию.
-                  </p>
-                  <Button synthetic block on:click={() => {
-                    create_company = true;
-                    show_creator = true;
-                  }}>
-                    Зарегистрировать компанию-риэлтора
-                  </Button>
-                </div>
-            </div>
-            {/if}
-
             <div>
               <Input
                 label="Ваш email"
@@ -121,7 +119,7 @@
                 errors={form.errors.email}
               />
 
-              <div class="pb-1 text-gray-500">
+              <div class="text-gray-500">
                 {#if user.email_verified_at}
                   Email подтвержден: {user.email_verified_at}
                 {:else}
@@ -156,31 +154,15 @@
               </span>
             </div>
 
-            <!--
-            <div class="grid grid-cols-3">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Whatsapp
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">https://</span>
-                  <input type="text" name="company-website" id="company-website" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="wa.me/qr/AddMeInWA">
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-3">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Telegram
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">https://</span>
-                  <input type="text" name="company-website" id="company-website" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="t.me/BestUser">
-                </div>
-              </div>
-            </div>
-            -->
+            {#if $userStore.data
+              && $userStore.data.role !== 'dementor'
+              && !$userStore.data.company_id
+              && $userStore.data.realtor_accesses?.length === 0
+            }
+              <RealtorAlert
+                on:show-company-list={() => { show_company_list = true; }}
+              />
+            {/if}
           </div>
 
           <div class="bg-gray-100 px-4 py-3 text-right flex justify-end sm:px-6">
@@ -199,12 +181,12 @@
 </div>
 
 <Modal
-  bind:visible={show_creator}
-  title={$_('company_creator.title')}
+  bind:visible={show_company_list}
+  title="Список агентств"
 >
-  {#if create_company}
-    <CompanyBasicForm
-      show_description={false}
+  {#if show_company_list}
+    <CompanySelectionForm
+      on:sent={() => { refresh(); }}
     />
   {/if}
 </Modal>

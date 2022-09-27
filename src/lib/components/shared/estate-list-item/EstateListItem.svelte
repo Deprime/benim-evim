@@ -43,7 +43,7 @@
    */
   const getEstateUrl = (mode: boolean): string => {
     return mode
-      ? `/profile/posts/${estate.id}`
+      ? `/app/posts/${estate.id}`
       : `/estate/${estate.id}`;
       // : `#`;
   }

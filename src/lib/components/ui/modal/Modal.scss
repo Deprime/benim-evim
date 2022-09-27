@@ -1,12 +1,27 @@
 
 .modal {
-	position: relative;
-	z-index: 2;
-	background: #fff;
-	width: 772px;
-  @apply rounded-md;
-  @apply py-4 px-6;
-  @apply m-auto;
+  @apply relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all;
+  @apply sm:my-8 w-10/12 md:w-8/12;
+
+  &-size-xs {
+    @apply lg:w-3/12;
+  }
+
+  &-size-sm {
+    @apply lg:w-4/12;
+  }
+
+  &-size-md {
+    @apply lg:w-6/12;
+  }
+
+  &-size-lg {
+    @apply lg:w-8/12;
+  }
+
+  &-size-xl {
+    @apply lg:w-10/12;
+  }
 
 	&-title {
     @apply flex text-2xl;

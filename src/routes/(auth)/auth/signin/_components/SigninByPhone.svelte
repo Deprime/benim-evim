@@ -52,7 +52,7 @@
       userStore.setToken(token);
       userStore.setData(user);
       form.errors = false;
-      goto('/profile')
+      goto('/app/profile')
     }
     catch (error: any) {
       form.errors = true;

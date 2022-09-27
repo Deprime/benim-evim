@@ -23,14 +23,14 @@
         Продажа квартир, таунхаусов, домов и вилл в Турции
       </h1>
 
-      <div class="flex flex-row justify-between lg:justify-start gap-2  text-sm lg:text-base">
+      <!-- <div class="flex flex-row justify-between lg:justify-start gap-2  text-sm lg:text-base">
         <div class="text-slate-400">
           Найдено 1 371 объявление
         </div>
         <div class="text-blue-800 font-semibold">
           На карте
         </div>
-      </div>
+      </div> -->
     </header>
 
     <!-- <div class="mb-10">

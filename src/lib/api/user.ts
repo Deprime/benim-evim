@@ -84,6 +84,23 @@ const userApi = {
     const url = `app/profile/change-password`;
     return $axios.put(url, {password, password_confirmation})
   },
+
+
+  /**
+   * Create realtor access
+   */
+  createRealtorAccess: (company_id: number): Promise<any> => {
+    const url = `app/realtor-access`;
+    return $axios.post(url, {company_id})
+  },
+
+  /**
+   * List realtor access
+   */
+  listRealtorAccess: (): Promise<any> => {
+    const url = `app/profile/realtor-access-list`;
+    return $axios.get(url)
+  },
 }
 
 export default userApi;

@@ -10,7 +10,7 @@
   import { estateApi } from '$lib/api';
 
   // Data
-  const CREATE_URL = '/profile/posts/create';
+  const CREATE_URL = '/app/posts/create';
   let errors = {};
   let estateList = <any>[];
   let loading = true;
