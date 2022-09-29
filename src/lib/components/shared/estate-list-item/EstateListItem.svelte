@@ -105,10 +105,12 @@
         <div class="font-medium">
           Автор:
         </div>
-        <div class="text-sm">
+        <div class="text-sm flex flex-col">
           {estate.author.first_name}
           {#if estate.author?.email}
-            ({estate.author.email})
+            <div>
+              ({estate.author.email})
+            </div>
           {/if}
         </div>
 

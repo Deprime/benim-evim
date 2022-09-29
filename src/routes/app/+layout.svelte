@@ -55,6 +55,7 @@
   const getProfileMenu = (realtor_accesses = []): IMenuItem[] => {
     const menu = [
       {url: '/app/profile', key: 'profile', default: 'Your Profile'},
+      {url: '/app/profile/contacts', key: 'contacts', default: 'My Contacts'},
       {url: '/app/profile/security', key: 'security', default: 'Security'},
       {url: '/app/profile/favorites', key: 'favorites', default: 'Favorites'},
     ];

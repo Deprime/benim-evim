@@ -59,7 +59,7 @@
         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
           {#if form.loading}
             <div class="h-52 justify-center content-center">
-              Loading...
+              {$_('actions.loading')}
             </div>
           {:else}
             <CompanyBasicForm

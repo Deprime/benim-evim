@@ -78,6 +78,22 @@ const userApi = {
   },
 
   /**
+   * Get contacts
+   */
+  getContacts: (): Promise<any> => {
+    const url = `app/profile/contacts`;
+    return $axios.get(url)
+  },
+
+  /**
+   * Update contacts
+   */
+  updateContacts: (data): Promise<any> => {
+    const url = `app/profile/contacts`;
+    return $axios.put(url, data)
+  },
+
+  /**
    * Change password
    */
   changePassword: (password: string, password_confirmation: string): Promise<any> => {

@@ -31,6 +31,10 @@
    */
   const setLocale = (lang) => {
     visible = false;
+
+    if (typeof localStorage === 'object') {
+      localStorage.setItem('locale', lang);
+    }
     setupI18n({ withLocale: lang.locale });
   }
 </script>

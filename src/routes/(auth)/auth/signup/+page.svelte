@@ -235,7 +235,7 @@
 
             <ButtonGroup class="w-full">
               <CountryPrefixSelect
-                class="w-20 mr-2 mt-0"
+                class="w-24 mr-2 mt-0"
                 bind:value={form.prefix}
                 disabled={form.loading || form.is_phone_valid}
               >

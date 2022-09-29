@@ -80,15 +80,15 @@
             {:else}
               <Alert variant="info">
                 <ul class="list">
-                  <li>Количество символов в поле Пароль должно быть не менее 6.</li>
-                  <li>Пароль должен содержать заглавные, строчные латинские буквы и цифры</li>
+                  <li>{$_(`pages.security.text1`)}</li>
+                  <li>{$_(`pages.security.text2`)}</li>
                 </ul>
               </Alert>
             {/if}
 
             <div>
               <Input
-                label="Новый пароль"
+                label={$_(`pages.security.new_password`)}
                 class="w-2/3"
                 type="password"
                 bind:value={user.password}
@@ -98,7 +98,7 @@
 
             <div>
               <Input
-                label="Повторите новый пароль"
+                label={$_(`pages.security.repeat_password`)}
                 class="w-2/3 pb-3"
                 type="password"
                 bind:value={user.password_confirmation }

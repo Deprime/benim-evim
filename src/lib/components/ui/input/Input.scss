@@ -1,6 +1,7 @@
 .input-control {
   @apply shadow-sm focus:border-blue-500 block w-full sm:text-sm border-gray-300;
   @apply rounded-md;
+  @apply placeholder:text-slate-400;
 
   &-disabled {
     @apply opacity-90 bg-slate-100;

@@ -47,7 +47,7 @@
     {$_(`pages.posts.subtitle`)}
     <div slot="actions">
       <Button on:click={() => {goto(CREATE_URL)}}>
-        Создать обьявление
+        {$_('actions.create_post')}
       </Button>
     </div>
   </PageHeader>
@@ -55,7 +55,7 @@
   {#if loading}
     <div class="space-y-6 bg-white px-4 py-5 sm:p-6  rounded-lg">
       <div class="flex flex-col justify-center items-center py-10 space-y-6 bg-white">
-        Загрузка...
+        {$_('actions.loading')}...
       </div>
     </div>
   {:else}
@@ -69,11 +69,11 @@
       <div class="space-y-6 bg-white px-4 py-5 sm:p-6  rounded-lg">
         <div class="flex flex-col justify-center items-center py-10 space-y-6 bg-white">
           <p class="text-sm">
-            Список актвных обьявлений пуст.
+            {$_('pages.posts.no_data')}
           </p>
 
           <Button on:click={() => {goto(CREATE_URL)}}>
-            Создать обьявление
+            {$_('actions.create_post')}
           </Button>
         </div>
       </div>

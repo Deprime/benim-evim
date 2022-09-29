@@ -10,9 +10,11 @@
   import { PageHeader, Map } from '$lib/components/shared';
   import NavTabs from '../_components/NavTabs.svelte';
 
+  // Services
   import { estateApi } from '$lib/api';
-  import { getNotificationsContext } from 'svelte-notifications';
+  import toast from 'svelte-french-toast'
 
+  // Types
   import type { ICurrency } from '$lib/interfaces';
 
   // Props
@@ -29,7 +31,6 @@
   // Data
   let { params } = $page;
   const id = parseInt(params.id);
-  const { addNotification } = getNotificationsContext();
 
   let errors = {};
   let settlementList = <any>[];
@@ -60,8 +61,8 @@
   const getPriceLabel = ($$currency: ICurrency, rent_type_id: number) => {
     if ($$currency) {
       return (rentTypeId === 1 )
-      ? `Цена за месяц ${$$currency.symbol}`
-      : `Цена ${$$currency.symbol}`;
+      ? `${$_('pages.post_editor.month_price')} за месяц ${$$currency.symbol}`
+      : `${$_('pages.post_editor.price')} ${$$currency.symbol}`;
     }
     return `Цена`;
   }
@@ -169,12 +170,7 @@
       $$estate.rent_type_id = rentTypeId;
       if (Number.isInteger(id)) {
         const response = await estateApi.update(id, $$estate);
-
-        addNotification({
-          text: 'Изменения сохранены',
-          type: "success",
-          position: 'top-right',
-        })
+        toast.success($_('noty.save_success'), {position: "top-right"});
       }
       else {
         const response = await estateApi.create($$estate);
@@ -184,14 +180,7 @@
     }
     catch (error: any) {
       form.errors = error.response?.data || {};
-
-      addNotification({
-        text: 'Данные заполнены не корректно',
-        type: "error",
-        position: 'top-right',
-        removeAfter: 4000,
-      });
-
+      toast.error($_('noty.validation_errors'), {position: "top-right"});
       throw new Error(error)
     }
     finally {
@@ -224,15 +213,18 @@
       <nav class="py-4 px-6 bg-slate-50 border-b border-b-slate-200 rounded-t-md">
         <NavTabs id={$page.params.id} />
       </nav>
-      <!-- <header class="py-4 px-6 bg-slate-50 border-b border-b-slate-200 font-medium text-base">
-        {#if estate.title && estate.title.elngth > 0}
-          {estate.title}
-        {:else}
-          <span class="text-slate-400">
-            Наименование обьекта
-          </span>
-        {/if}
-      </header> -->
+
+      <!--
+        <header class="py-4 px-6 bg-slate-50 border-b border-b-slate-200 font-medium text-base">
+          {#if estate.title && estate.title.elngth > 0}
+            {estate.title}
+          {:else}
+            <span class="text-slate-400">
+              Наименование объекта
+            </span>
+          {/if}
+        </header>
+      -->
 
       {#if !loading}
         <section class="editor-body">
@@ -241,7 +233,9 @@
               {#if rentTypeList.length > 0}
                 <RadioGroup bind:value={rentTypeId}>
                   <div slot="legend">
-                    <Label>Тип обьявления:</Label>
+                    <Label>
+                      {$_('pages.post_editor.rent_type')}:
+                    </Label>
                   </div>
                   {#each rentTypeList as rentType}
                     <div class="pb-2">
@@ -258,7 +252,7 @@
             <div class="w-1/6">
               <Select2
                 id="estate_type"
-                label="Тип жилья"
+                label={$_('pages.post_editor.estate_type')}
                 items={estateTypeList}
                 value={estateType}
                 isClearable={false}
@@ -276,7 +270,7 @@
             <div class="w-1/6">
               <Select2
                 id="settlement"
-                label="Город"
+                label={$_('pages.post_editor.settlement')}
                 items={settlementList}
                 value={settlement}
                 isClearable={false}
@@ -287,7 +281,7 @@
 
             <div class="w-5/6">
               <Input
-                label={`Адрес обьекта`}
+                label={$_('pages.post_editor.object_address')}
                 bind:value={estate.address}
                 disabled={form.loading}
               />
@@ -298,10 +292,10 @@
               {#if estate.suggested_address}
                 <div class="flex flex-row justify-between pt-1">
                     <div class="text-slate-500">
-                      Отметка на карте: {estate.suggested_address}
+                      {$_('pages.post_editor.map_point')}: {estate.suggested_address}
                     </div>
                     <span class="link" on:click={setAddress}>
-                      Установить
+                      {$_('actions.set')}
                     </span>
                 </div>
               {/if}
@@ -323,7 +317,7 @@
           <div class="flex flex-row space-x-4">
             <div class="w-1/6">
               <Input
-                label="Этаж"
+                label={$_('pages.post_editor.level')}
                 type="number"
                 disabled={form.loading}
                 bind:value={estate.level}
@@ -333,7 +327,7 @@
             </div>
             <div class="w-1/6">
               <Input
-                label="Этажей в доме"
+                label={$_('pages.post_editor.total_levels')}
                 type="number"
                 disabled={form.loading}
                 bind:value={estate.total_levels}
@@ -345,7 +339,7 @@
           <div class="flex flex-row space-x-4">
             <div class="w-1/6">
               <Input
-                label="Количество комнат"
+                label={$_('pages.post_editor.room_count')}
                 type="number"
                 required
                 disabled={form.loading}
@@ -355,7 +349,7 @@
             </div>
             <div class="w-1/6">
               <Input
-                label="Площадь м²"
+                label={`${$_('pages.post_editor.area')} m²`}
                 type="number"
                 required
                 disabled={form.loading}
@@ -381,7 +375,7 @@
             <div class="w-1/6">
               <Select2
                 id="currency"
-                label="Валюта"
+                label={$_('pages.post_editor.currency')}
                 items={currencyList}
                 value={currency}
                 isClearable={false}
@@ -396,7 +390,7 @@
           <div>
             <Input
               type="url"
-              label="Ссылка на видео (Youtube, Vimeo)"
+              label={`${$_('pages.post_editor.videol_link')} (Youtube, Vimeo)`}
               placeholder="пример https://youtu.be/dQw4w9WgXcQ"
               class="w-2/3"
               disabled={form.loading}
@@ -407,9 +401,9 @@
 
           <div>
             <Editor
-              label="Описание обьекта"
+              label={$_('pages.post_editor.description')}
               required
-              placeholder="Введите описание обьекта"
+              placeholder={$_('pages.post_editor.enter_description')}
               class="w-2/3 pb-3"
               bind:value={estate.description }
               disabled={form.loading}
@@ -419,7 +413,7 @@
         </section>
       {:else}
         <div class="py-16 flex content-center justify-center">
-          Загрузка
+          {$_('actions.loading')}
         </div>
       {/if}
 

@@ -15,10 +15,10 @@
   const getMenu = ($$id: string | number) => {
     const disabled = !Number.isInteger(parsedId);
     const list = [
-      {url: `/app/posts/${$$id}`, key: 'editor', default: 'Информация', disabled},
-      {url: `/app/posts/${$$id}/gallery`, key: 'gallery', default: 'Галерея', disabled},
+      {url: `/app/posts/${$$id}`, key: 'pages.post_editor.info', default: 'Информация', disabled},
+      {url: `/app/posts/${$$id}/gallery`, key: 'pages.post_editor.gallery', default: 'Галерея', disabled},
+      {url: `/app/posts/${$$id}/status`, key: 'pages.post_editor.status', default: 'Статус', disabled},
     ];
-
     return list;
   }
 </script>
@@ -34,7 +34,7 @@
         class:tab-link-disabled={item.disabled}
         role="menuitem"
       >
-        {$_(`pages.${item.key}.title`, {default: item.default})}
+        {$_(`${item.key}`, {default: item.default})}
       </a>
     {/each}
   </nav>

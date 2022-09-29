@@ -124,8 +124,6 @@
       await update();
     }
   }
-
-  // onMount(async () => {})
 </script>
 
 <section class="text-sm flex flex-row">
@@ -136,8 +134,7 @@
   >
     <div>
       <Input
-        label="Название агентства"
-        placeholder="Укажите название агентства"
+        label={$_('pages.company.agency_title')}
         required
         bind:value={company.title}
         disabled={form.loading}
@@ -147,8 +144,8 @@
 
     <div>
       <Input
-        label="Адрес"
-        placeholder="Страна, город"
+        label={$_('pages.company.address')}
+        placeholder={$_('pages.company.address_placeholder')}
         required
         bind:value={company.address}
         disabled={form.loading}
@@ -158,8 +155,7 @@
 
     <div>
       <Input
-        label="ИНН"
-        placeholder="10 или 12 цифр"
+        label={$_('pages.company.inn')}
         required
         bind:value={company.inn}
         disabled={form.loading || !managment_mode}
@@ -170,7 +166,7 @@
     {#if managment_mode}
       <div class="pb-6 border-b border-solid border-b-slate-200">
         <Label>
-          Представитель <span class="text-red-500">*</span>
+          {$_('pages.company.head')} <span class="text-red-500">*</span>
         </Label>
         {#if form.errors.head_id}
           <ErrorNotification errors={form.errors.head_id} />
@@ -183,7 +179,7 @@
             </span>
             {:else}
             <span class="text-slate-600 inline-block bg-slate-100 px-3 py-1 rounded">
-              Не выбран
+              {$_('pages.company.no_head')}
             </span>
           {/if}
         </div>
@@ -191,7 +187,7 @@
         {#if !company.id}
           <div class="flex flex-row relative">
             <Input
-              placeholder="Поиск по номеру телефона"
+              placeholder={$_('pages.company.search_by_phone')}
               bind:value={head_phone}
               disabled={form.loading || form.search}
               class="flex-grow mr-1 relative z-[1]"
@@ -220,7 +216,7 @@
     {#if show_description}
       <div>
         <Label>
-          Описание агентства
+          {$_('pages.company.description')}
         </Label>
         <Editor
           bind:value={company.description}

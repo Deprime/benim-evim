@@ -3,6 +3,7 @@
 
   import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+  import { browser } from '$app/environment';
 
   // Components
   import { Navigation, Footer } from '$lib/components/structure';
@@ -22,12 +23,19 @@
   // Methods
   onMount(async () => {
     let defaultLocale = DEFAULT_LOCALE;
-    if (navigator.languages && navigator.languages[0]) {
+    let savedLocale;
+
+    // Checking saved locale
+    if (typeof localStorage === 'object') {
+      savedLocale = localStorage.getItem('locale');
+    }
+
+    if (!savedLocale && navigator.languages && navigator.languages[0]) {
       const clientLocale = navigator.languages[0].split('-');
       defaultLocale = clientLocale[0];
     }
 
-    setupI18n({ withLocale: defaultLocale });
+    setupI18n({ withLocale: savedLocale || defaultLocale });
 
     if (userStore.isLoggedIn()) {
       await userService.getProfile();

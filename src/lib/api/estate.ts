@@ -44,6 +44,23 @@ const estateApi = {
     const url = `${PREFIX}/${estate_id}`;
     return $axios.put(url, data)
   },
+
+
+  /**
+   * Get status
+   */
+  getStatus: (estate_id: number): Promise<any> => {
+    const url = `${PREFIX}/${estate_id}/status`;
+    return $axios.get(url)
+  },
+
+  /**
+   * Set status
+   */
+  setStatus: (estate_id: number, data: any): Promise<any> => {
+    const url = `${PREFIX}/${estate_id}/status`;
+    return $axios.put(url, data)
+  },
 }
 
 export default estateApi;

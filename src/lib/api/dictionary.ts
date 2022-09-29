@@ -18,6 +18,14 @@ const dictionaryApi = {
     const url = `${PREFIX}/contact-list`;
     return $axios.get(url)
   },
+
+  /**
+   * Get contact list
+   */
+  getStatusList: (): Promise<any> => {
+    const url = `${PREFIX}/estate-status-list`;
+    return $axios.get(url)
+  },
 }
 
 export default dictionaryApi;

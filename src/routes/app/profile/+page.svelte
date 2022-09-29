@@ -23,8 +23,9 @@
     errors: {},
   }
 
+  // Methods
   /**
-   * loadInititalData
+   * Get prefix list
    */
   const getPrefixList = async (): Promise<any> => {
     form.loading = true;
@@ -83,13 +84,15 @@
 </script>
 
 <svelte:head>
-	<title>User profile</title>
+	<title>
+    {$_('pages.profile.title')}
+  </title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <div class="min-h-full flex flex-col justify-center">
   <PageHeader>
-    User profile
+    {$_('pages.profile.title')}
   </PageHeader>
 
   <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -99,7 +102,7 @@
           <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
             <div>
               <Input
-                label="Ваше имя"
+                label={$_('pages.profile.your_name')}
                 placeholder="Укажите ваше имя"
                 class="w-full md:w-2/3"
                 bind:value={user.first_name}
@@ -110,44 +113,45 @@
 
             <div>
               <Input
-                label="Ваш email"
+                label={$_('pages.profile.email')}
                 placeholder="Укажите ваш email"
-                class="w-full md:w-2/3 pb-3"
+                class="w-full md:w-2/3"
                 type="email"
                 bind:value={user.email}
                 disabled={form.loading}
                 errors={form.errors.email}
               />
 
-              <div class="text-gray-500">
+              <!--
+              <div class="text-gray-500 pt-3">
                 {#if user.email_verified_at}
                   Email подтвержден: {user.email_verified_at}
                 {:else}
                   Email не подтвержден.
                 {/if}
               </div>
+              -->
             </div>
 
             <div>
               <Label for="phone">
-                Ваш номер телефона
+                {$_('pages.profile.phone')}
               </Label>
 
               <Input
                 id="phone"
                 class="w-1/2"
-                placeholder="Enter phone number"
                 type="text"
                 name="phone"
                 disabled
-                value={`${user.prefix} ${user.phone}`}
+                value={user.phone ? `${user.prefix} ${user.phone}` : ""}
               />
 
-              <p class="pb-1 text-gray-500">
-                {#if user.phone_verified_at}
-                  Номер подтвержден: {user.phone_verified_at}
-                {/if}
-              </p>
+              {#if !form.loading && user.phone_verified_at}
+                <p class="py-1 text-xs text-gray-500">
+                  {$_('pages.profile.phone_validated')}: {user.phone_verified_at}
+                </p>
+              {/if}
 
               <span class="pb-2 link hidden">
                 Изменить номер телефона

@@ -19,13 +19,25 @@
     "get_code": "Kodu al",
     "confirm": "Onaylamak",
     "approve": "Onaylamak",
-    "reject": "Reddet"
+    "reject": "Reddet",
+    "create_post": "Reklam Oluştur",
+    "loading": "İndirme",
+    "example": "Örnek",
+    "set": "Yüklemek"
   },
 
   "statuses": {
     "sent": "İncelemeyi bekliyor",
     "approved": "Onaylandı",
     "rejected": "Reddedildi"
+  },
+
+  "estate_statuses": {
+    "draft": "Taslak",
+    "moderation": "Kontrolde",
+    "rejected": "Reddedildi",
+    "published": "Yayınlandı",
+    "archived": "Arşivde"
   },
 
   "errors": {
@@ -43,23 +55,70 @@
     "access_requests": {
       "title": "Erişim İstekleri",
       "title2": "Erişim taleplerim",
-      "reject_reason": "Reddetme nedeni"
+      "reject_reason": "Reddetme nedeni",
+
+      "agency": "Ajans",
+      "author": "Yazar",
+      "comment": "Yorum",
+      "request_status": "İstek durumu",
+      "send_date": "Gönderim tarihi"
     },
     "security": {
       "title": "Güvenlik",
-      "subtitle": "Güvenlik Ayarları"
+      "subtitle": "Güvenlik Ayarları",
+      "new_password": "Yeni şifre",
+      "repeat_password": "Yeni şifreyi tekrarlayın",
+      "text1": "Parola alanındaki karakter sayısı en az 6 olmalıdır",
+      "text2": "Parola büyük harf, küçük harfli Latin harfleri ve sayıları içermelidir"
     },
     "company": {
       "title": "Şirket",
-      "subtitle": "Şirket ayarları"
+      "subtitle": "Şirket ayarları",
+      "agency_title": "Ajansın adı",
+      "address": "Adres",
+      "address_placeholder": "Ülke, şehir",
+      "inn": "T.C. Kimlik No",
+      "description": "Ajansların açıklaması",
+      "head": "Temsilci",
+      "no_head": "Temsilci seçilmedi",
+      "search_by_phone": "Telefon numarasına göre arama yapın"
     },
     "posts": {
-      "title": "Bildirimler",
-      "subtitle": "Bildirimler"
+      "title": "Yayınlar",
+      "subtitle": "Yayınlar",
+      "no_data": "Etkin yayınların listesi boş"
     },
     "post_editor": {
-      "title": "Reklam Düzenleyici"
+      "title": "Yayın Editörü",
+      "title_status": "Yayın durumu",
+      "current_status": "Mevcut durum",
+
+      "info": "Bilgi",
+      "gallery": "Galeri",
+      "status": "Statü",
+
+      "rent_type": "Reklam türü",
+      "estate_type": "Konut tipi",
+      "settlement": "Şehir",
+      "object_address": "Nesnenin adresi",
+      "map_point": "Haritadaki işaret",
+      "level": "Kat",
+      "total_levels": "Evin katları",
+      "room_count": "Oda sayısı",
+      "area": "Alan",
+      "price": "Fiyat",
+      "month_price": "Aylık fiyat",
+      "currency": "Döviz",
+      "videol_link": "Videoya bağlantı",
+      "description": "Nesne Açıklaması",
+      "enter_description": "Nesnenin açıklamasını girin"
     },
+
+    "gallery": {
+      "poster": "Poster",
+      "set_as_poster": "Poster yap"
+    },
+
     "policy": {
       "footer": "Создавая аккаунт вы соглашаетесь с нашими <a href='{terms_url}'>Условиями обслуживания</a>. Больше об использании персональных данных в <a href='{privacy_url}'>Политике конфеденциальности</a>."
     },
@@ -81,7 +140,7 @@
       "get_code": "Kodu al",
       "forgot_password": "Şifreyi unuttunuz mu?",
       "flashcall_title": "Şimdi size bir telefon gelecek",
-      "flachcall_text": "Gelen aramanın son 4 hanesini girin"
+      "flashcall_text": "Gelen aramanın son 4 hanesini girin"
     },
     "signup_email": {
       "title": "E-posta ile kayıt olun",
@@ -108,9 +167,16 @@
       "user_data": "Kişisel Veriler",
       "whats_your_name": "Привет! как тебя зовут?",
       "name": "Ad",
+      "your_name": "Adınız",
       "email": "Email",
       "password": "Parola",
-      "phone": "Telefon numarası"
+      "phone": "Telefon numarası",
+      "phone_validated": "Numara onaylandı"
+    },
+
+    "contacts": {
+      "title": "Kişilerim",
+      "data_need": "En az bir kişiyi doldurmanız gerekiyor"
     },
     "settings": {
       "title": "Ayarlar",

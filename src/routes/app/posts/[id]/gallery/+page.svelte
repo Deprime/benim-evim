@@ -184,7 +184,7 @@
                   class:inline-block={photo.is_poster}
                   on:click={() => setPoster(photo, index)}
                 >
-                  {photo.is_poster ? "Постер" : "Сделать постером"}
+                  {photo.is_poster ? $_('pages.gallery.poster') : $_('pages.gallery.set_as_poster')}
                 </span>
                 <span
                   class="image-item-action image-item-remove"
@@ -206,7 +206,7 @@
     {:else}
       <div class="py-16 space-y-6 flex flex-col items-center justify-center">
         <h4>
-          Загрузка
+          {$_('actions.loading')}
         </h4>
         <div class="relative">
           <Spinner variant="primary" />

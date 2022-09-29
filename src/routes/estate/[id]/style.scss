@@ -17,6 +17,14 @@
     :global(ul li) {
       @apply list-inside list-disc text-sm;
     }
+
+    :global(ol) {
+      @apply pl-2 text-sm;
+    }
+
+    :global(ol li) {
+      @apply list-inside list-decimal text-sm;
+    }
   }
 }
 

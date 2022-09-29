@@ -59,10 +59,18 @@
           <thead>
             <tr>
               <th width="100px">ID</th>
-              <th>Агентство</th>
-              <th width="240px">Комментарий</th>
-              <th width="140px">Статус запроса</th>
-              <th width="180px">Отправлен</th>
+              <th>
+                {$_(`pages.access_requests.agency`)}
+              </th>
+              <th width="240px">
+                {$_(`pages.access_requests.comment`)}
+              </th>
+              <th width="140px">
+                {$_(`pages.access_requests.request_status`)}
+              </th>
+              <th width="180px">
+                {$_(`pages.access_requests.send_date`)}
+              </th>
               <th width="60px"></th>
             </tr>
           </thead>

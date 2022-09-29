@@ -116,16 +116,16 @@
           <thead>
             <tr>
               <th width="200px">
-                Автор
+                {$_(`pages.access_requests.author`)}
               </th>
               <th>
-                Комментарий
+                {$_(`pages.access_requests.comment`)}
               </th>
               <th width="200px">
-                Статус запроса
+                {$_(`pages.access_requests.request_status`)}
               </th>
               <th width="160px">
-                Отправлен
+                {$_(`pages.access_requests.send_date`)}
               </th>
               <th width="110px"></th>
             </tr>
@@ -202,7 +202,7 @@
     title={$_('pages.access_requests.reject_reason')}
   >
     {#if reject_modal.realtor_access}
-      <Alert>
+      <Alert class="mb-4">
         <p class="mb-2">
           Отклонение запроса пользователя
         </p>

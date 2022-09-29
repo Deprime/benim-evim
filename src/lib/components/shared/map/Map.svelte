@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount, afterUpdate,  createEventDispatcher } from 'svelte';
   import { browser } from '$app/environment';
+  import { locale } from '$lib/config/i18n';
 
   import type { IMapMarker } from '$lib/interfaces/map-marker';
 
   // Props
   // export let lang = 'en_EN';
-  export let lang = 'ru_RU';
+  export let lang = $locale || 'ru';
   export let center = [55.75361503443606, 37.620883000000006];
   export let zoom = 16;
   // export let draggable = false;
@@ -142,7 +143,7 @@
 
 <svelte:head>
   <script
-    src={`https://api-maps.yandex.ru/2.1/?lang=${lang}&apikey=fe01a68f-ddd3-429d-a13e-2b33e8310470`}
+    src={`https://api-maps.yandex.ru/2.1/?lang=${lang}_RU&apikey=fe01a68f-ddd3-429d-a13e-2b33e8310470`}
     type="text/javascript"
     on:load={() => {
       if (!loaded) {
