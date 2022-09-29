@@ -26,6 +26,12 @@
     "set": "Yüklemek"
   },
 
+  "noty": {
+    "validation_errors": "Veriler yanlış doldurulmuş",
+    "save_success": "Değişiklikler kaydedildi",
+    "status_changed": "Durum değişti"
+  },
+
   "statuses": {
     "sent": "İncelemeyi bekliyor",
     "approved": "Onaylandı",
@@ -56,6 +62,7 @@
       "title": "Erişim İstekleri",
       "title2": "Erişim taleplerim",
       "reject_reason": "Reddetme nedeni",
+      "agency_list": "Ajansların listesi",
 
       "agency": "Ajans",
       "author": "Yazar",
@@ -168,6 +175,7 @@
       "whats_your_name": "Привет! как тебя зовут?",
       "name": "Ad",
       "your_name": "Adınız",
+      "your_surname": "Soyadınız",
       "email": "Email",
       "password": "Parola",
       "phone": "Telefon numarası",

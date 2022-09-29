@@ -9,6 +9,7 @@ export default interface ICompany {
   address?: string,
   logo?: string,
   poster?: string,
+  is_active: boolean,
 
   created_at?: string,
   updated_at?: string,

@@ -5,7 +5,9 @@
   import { Input, Button, Alert } from '$lib/components/ui';
   import { PageHeader  } from '$lib/components/shared';
 
+  // Services
   import { userApi } from '$lib/api';
+  import toast from 'svelte-french-toast'
 
   // Data
   const user: any = {
@@ -44,9 +46,11 @@
       user.password = "";
       user.password_confirmation = "";
       form.success = true;
+      toast.success($_('noty.save_success'), {position: "top-right"});
     }
     catch (error: any) {
       form.errors = error.response?.data || {};
+      toast.error($_('noty.validation_errors'), {position: "top-right"});
       throw new Error(error)
     }
     finally {

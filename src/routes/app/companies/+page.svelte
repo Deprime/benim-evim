@@ -4,28 +4,26 @@
   import dayjs from 'dayjs';
 
   // Componetns
-  import { Input, Button, Label, Modal } from '$lib/components/ui';
+  import { Button, Modal } from '$lib/components/ui';
   import { PageHeader } from '$lib/components/shared';
   import CompanyBasicForm from '../_components/CompanyBasicForm.svelte';
 
   // Services
   import { companyManagmentApi } from '$lib/api';
+  import toast from 'svelte-french-toast'
 
   // Types
   import type { ICompany } from '$lib/interfaces';
 
   // Data
-  const FORMAT_YMD = 'DD.MM.YYYY';
+  // const FORMAT_YMD = 'DD.MM.YYYY';
   const FORMAT_YMDHMS = 'DD.MM.YYYY H:m:s';
 
   let show_creator = false;
   let loading = true;
+  let processing = false;
   let company_list: ICompany[] = [];
   let company: ICompany|null = null;
-  const form = {
-    loading: false,
-    errors: {},
-  }
 
   // Methods
   /**
@@ -55,6 +53,30 @@
     }
     finally {
       loading = false;
+    }
+  }
+
+  /**
+   * Set company status
+   */
+  const setCompanyStatus = async (company: ICompany) => {
+    processing = true;
+    try {
+      const new_status = !company.is_active;
+      await companyManagmentApi.updateStatus(company.id, new_status);
+
+      if (new_status === true) {
+        toast.success("Компания активирована", {position: "top-right"});
+      }
+      else {
+        toast("Компания деактивирована", {icon: '⚠️', position: "top-right"});
+      }
+    }
+    catch (error: any) {
+      throw new Error(error)
+    }
+    finally {
+      processing = false;
     }
   }
 
@@ -97,6 +119,7 @@
             <th scope="col" width="140px">ИНН</th>
             <th scope="col">Адрес</th>
             <th scope="col" width="160px">Дата создания</th>
+            <th scope="col" width="85px">Активна</th>
           </tr>
         </thead>
         <tbody>
@@ -128,6 +151,13 @@
               </td>
               <td>
                 {dayjs(company.created_at).format(FORMAT_YMDHMS)}
+              </td>
+              <td class="text-center">
+                <input
+                  type="checkbox"
+                  bind:checked={company.is_active}
+                  on:click={setCompanyStatus(company)}
+                />
               </td>
             </tr>
           {/each}

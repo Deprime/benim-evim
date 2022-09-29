@@ -1,6 +1,6 @@
 <script lang="ts">
   // Props
-  export let value = "";
+  export let value: string|number|boolean = "";
 
   // Data
   const uuid = crypto.randomUUID();

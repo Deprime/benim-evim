@@ -43,6 +43,15 @@ const companyManagmentApi = {
     const url = `${PREFIX}/${company_id}`;
     return $axios.delete(url)
   },
+
+  /**
+   * Update company status
+   */
+  updateStatus: (company_id: number, status: boolean): Promise<any> => {
+    const url = `${PREFIX}/${company_id}/status`;
+    const data = { is_active: status }
+    return $axios.put(url, data)
+  },
 }
 
 export default companyManagmentApi;

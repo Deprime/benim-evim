@@ -3,15 +3,17 @@
   import { _ } from '$lib/config/i18n';
   import { page } from '$app/stores';
 
-  import { XIcon } from 'svelte-feather-icons'
+  // import { XIcon } from 'svelte-feather-icons'
 
   // Componetns
   import { Button } from '$lib/components/ui';
   import { PageHeader } from '$lib/components/shared';
   import NavTabs from '../../_components/NavTabs.svelte';
 
+  // Services
   import { estateApi, dictionaryApi } from '$lib/api';
   import { getNotificationsContext } from 'svelte-notifications';
+  import toast from 'svelte-french-toast'
 
   // Data
   let { params } = $page;
@@ -63,6 +65,7 @@
       }
       await estateApi.setStatus(id, data);
       await getStatus();
+      toast.success($_('noty.status_changed'), {position: "top-right"});
       errors = {};
     }
     catch (error: any) {

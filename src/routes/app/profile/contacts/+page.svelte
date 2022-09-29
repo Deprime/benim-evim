@@ -8,6 +8,7 @@
 
   // Services
   import { dictionaryApi, userApi } from '$lib/api';
+  import toast from 'svelte-french-toast'
 
   // Data
   let messenger_list: any = [];
@@ -25,7 +26,6 @@
    */
   const formatContacts = () => {
     contacts = [];
-
     messenger_list.forEach((el: any) => {
       if (el.value?.length > 0) {
         contacts.push({
@@ -68,11 +68,13 @@
       formatContacts();
       const data = { contacts };
       await userApi.updateContacts(data);
+      toast.success($_('noty.save_success'), {position: "top-right"});
       form.errors = {};
     }
     catch (error: any) {
       contacts = [];
       form.errors = error.response?.data || {};
+      toast.error($_('noty.validation_errors'), {position: "top-right"});
       throw new Error(error)
     }
     finally {

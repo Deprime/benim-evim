@@ -13,6 +13,7 @@
   import { userStore } from '$lib/stores';
   import { dictionaryApi, userApi } from '$lib/api';
   import { userService } from '$lib/services';
+  import toast from 'svelte-french-toast'
 
   // Data
   let show_company_list = false;
@@ -50,9 +51,11 @@
       await userApi.updateProfile(user);
       form.errors = {};
       await userService.getProfile();
+      toast.success($_('noty.save_success'), {position: "top-right"});
     }
     catch (error: any) {
       form.errors = error.response?.data || {};
+      toast.error($_('noty.validation_errors'), {position: "top-right"});
       throw new Error(error)
     }
     finally {
@@ -103,11 +106,23 @@
             <div>
               <Input
                 label={$_('pages.profile.your_name')}
-                placeholder="Укажите ваше имя"
+                placeholder={$_('pages.profile.your_name')}
                 class="w-full md:w-2/3"
                 bind:value={user.first_name}
                 disabled={form.loading}
+                required
                 errors={form.errors.first_name}
+              />
+            </div>
+
+            <div>
+              <Input
+                label={$_('pages.profile.your_surname')}
+                placeholder={$_('pages.profile.your_surname')}
+                class="w-full md:w-2/3"
+                bind:value={user.last_name}
+                disabled={form.loading}
+                errors={form.errors.last_name}
               />
             </div>
 
@@ -147,7 +162,7 @@
                 value={user.phone ? `${user.prefix} ${user.phone}` : ""}
               />
 
-              {#if !form.loading && user.phone_verified_at}
+              {#if !form.loading || user.phone_verified_at}
                 <p class="py-1 text-xs text-gray-500">
                   {$_('pages.profile.phone_validated')}: {user.phone_verified_at}
                 </p>
@@ -186,7 +201,7 @@
 
 <Modal
   bind:visible={show_company_list}
-  title="Список агентств"
+  title={$_('pages.access_requests.agency_list')}
 >
   {#if show_company_list}
     <CompanySelectionForm
