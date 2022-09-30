@@ -1,7 +1,11 @@
 <script>
-  import LanguageCurrency from "./LanguageCurrency.svelte";
-import SocialSection from "./SocialSection.svelte";
-  import SubscriptionSection from "./SubscriptionSection.svelte";
+  // Components
+  // import LanguageCurrency from "./LanguageCurrency.svelte";
+  // import SocialSection from "./SocialSection.svelte";
+  // import SubscriptionSection from "./SubscriptionSection.svelte";
+
+  const APP_ENV = import.meta.env.VITE_APP_ENV;
+  const APP_VERSION = import.meta.env.VITE_APP_VERSION;
 </script>
 
 <footer class="bg-gray-800" aria-labelledby="footer-heading">
@@ -39,6 +43,9 @@ import SocialSection from "./SocialSection.svelte";
                 </a>
               </li>
             </ul>
+            <div class="app-info">
+              build: {APP_ENV}-v{APP_VERSION}
+             </div>
           </div>
         </div>
       </div>
@@ -50,3 +57,9 @@ import SocialSection from "./SocialSection.svelte";
     <!-- <SocialSection /> -->
   </div>
 </footer>
+
+<style lang="scss">
+  .app-info {
+    @apply text-slate-100 opacity-10 text-xs py-4 cursor-default select-none;
+  }
+</style>
