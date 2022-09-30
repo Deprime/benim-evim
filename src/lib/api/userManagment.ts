@@ -1,6 +1,5 @@
 import $axios from '$lib/config/http';
 
-// const API_URL = import.meta.env.VITE_API_URL;
 const PREFIX = "app/admin/user";
 
 const userManagmentApi = {
