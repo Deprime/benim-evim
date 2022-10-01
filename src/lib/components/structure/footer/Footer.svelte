@@ -1,4 +1,6 @@
 <script>
+  import { _ } from '$lib/config/i18n';
+
   // Components
   // import LanguageCurrency from "./LanguageCurrency.svelte";
   // import SocialSection from "./SocialSection.svelte";
@@ -6,6 +8,13 @@
 
   const APP_ENV = import.meta.env.VITE_APP_ENV;
   const APP_VERSION = import.meta.env.VITE_APP_VERSION;
+
+  const mainMenu = [
+    {url: "/", key: "footer.mainMenu.item1", defaultTitle: "Поиск недвижимости"},
+    {url: "/auth/signup", key: "footer.mainMenu.item2", defaultTitle: "Регистрация"},
+    {url: "/auth/signin", key: "footer.mainMenu.item3", defaultTitle: "Авторизация"},
+    {url: "/company-connection", key: "footer.mainMenu.item4", defaultTitle: "Агентствам недвижимости"},
+  ];
 </script>
 
 <footer class="bg-gray-800" aria-labelledby="footer-heading">
@@ -15,37 +24,21 @@
       <div class="grid grid-cols-2 gap-8 xl:col-span-4">
         <div class="md:grid md:grid-cols-2 md:gap-8">
           <div>
-            <h3 class="text-base font-medium text-white">
-              Разделы
+            <h3 class="text-base font-medium text-white mb-2 pb-2 border-b border-solid border-b-gray-700/50">
+              {$_("footer.mainMenu.title")}
             </h3>
-            <ul role="list" class="mt-4 space-y-4">
-              <li>
-                <a href="/" class="text-base text-gray-300 hover:text-white">
-                  Поиск недвижимости
-                </a>
-              </li>
-
-              <li>
-                <a href="/auth/signup" class="text-base text-gray-300 hover:text-white">
-                  Регистрация
-                </a>
-              </li>
-
-              <li>
-                <a href="/auth/signin" class="text-base text-gray-300 hover:text-white">
-                  Авторизация
-                </a>
-              </li>
-
-              <li>
-                <a href="/company-connection" class="text-base text-gray-300 hover:text-white">
-                  Агентствам недвижимости
-                </a>
-              </li>
+            <ul class="mt-4 space-y-4">
+              {#each mainMenu as item}
+                <li>
+                  <a href={item.url} class="text-base text-gray-300 hover:text-white">
+                    {$_(`footer.mainMenu.${item.key}`, {default: item.defaultTitle})}
+                  </a>
+                </li>
+              {/each}
             </ul>
             <div class="app-info">
               build: {APP_ENV}-v{APP_VERSION}
-             </div>
+            </div>
           </div>
         </div>
       </div>
