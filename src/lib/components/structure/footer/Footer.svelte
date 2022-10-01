@@ -31,7 +31,7 @@
               {#each mainMenu as item}
                 <li>
                   <a href={item.url} class="text-base text-gray-300 hover:text-white">
-                    {$_(`footer.mainMenu.${item.key}`, {default: item.defaultTitle})}
+                    {$_(item.key, {default: item.defaultTitle})}
                   </a>
                 </li>
               {/each}
