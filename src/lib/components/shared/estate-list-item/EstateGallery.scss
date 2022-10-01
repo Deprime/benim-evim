@@ -19,6 +19,10 @@
       @apply overflow-hidden;
       @apply relative;
 
+      a {
+        @apply flex w-full;
+      }
+
       img {
         @apply rounded-md;
         @apply h-auto lg:h-60;
