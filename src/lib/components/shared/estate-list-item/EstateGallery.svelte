@@ -4,6 +4,7 @@
   // Props
   export let estate: any;
   export let editorMode = false;
+  export let estateUrl: string = "";
 
   // Data
   const defaultUrl = '/pics/1.jpg';
@@ -28,29 +29,32 @@
 
 <div class="estate-card-gallery">
   <div class="estate-card-gallery-poster">
-    {#if estate.photos?.length > 0}
-      <img
-        src={posterUrl}
-        alt="Real estate"
-      >
-      {#if editorMode}
-        <span class="estate-card-picture-counter">
-          + {estate.photos?.length - 1} фото
-        </span>
+    <a href={estateUrl}>
+      {#if estate.photos?.length > 0}
+        <img
+          src={posterUrl}
+          alt="Real estate"
+        >
+        {#if editorMode}
+          <span class="estate-card-picture-counter">
+            + {estate.photos?.length - 1} фото
+          </span>
+        {/if}
+      {:else}
+        <img
+          src={posterUrl}
+          alt="Real estate"
+        >
       {/if}
-    {:else}
-      <img
-        src={posterUrl}
-        alt="Real estate"
-      >
-    {/if}
+    </a>
   </div>
 
   {#if !editorMode}
     <div class="grid gap-2 grid-cols-3">
       {#if estate.photos}
         {#each estate.photos.slice(0, 3) as photo}
-            <div class="overflow-hidden cursor-pointer hover:opacity-80">
+          <div class="overflow-hidden cursor-pointer hover:opacity-80">
+            <a href={estateUrl}>
               <img
                 src={`${CDN_URL}/${photo.url}`}
                 alt="Real estate"
@@ -58,13 +62,13 @@
                 on:mouseenter={onMouseEnter}
                 on:mouseleave={onMouseLeave}
               >
-            </div>
-          {/each}
+            </a>
+          </div>
+        {/each}
       {/if}
     </div>
   {/if}
 </div>
-
 
 <style lang="scss">
   @import './EstateGallery.scss';

@@ -16,8 +16,6 @@
   // Data
   const FORMAT_YMD = 'DD.MM.YYYY'
   const FORMAT_YMDHMS = 'DD.MM.YYYY H:m:s'
-  const defaultUrl = '/pics/1.jpg';
-  let posterUrl = defaultUrl;
 
   $: estateTitle = getEstateTitle(editorMode);
   $: estateUrl = getEstateUrl(editorMode);
@@ -45,7 +43,6 @@
     return mode
       ? `/app/posts/${estate.id}`
       : `/estate/${estate.id}`;
-      // : `#`;
   }
 </script>
 
@@ -60,6 +57,7 @@
     <EstateGallery
       {estate}
       {editorMode}
+      {estateUrl}
     />
   </div>
 
