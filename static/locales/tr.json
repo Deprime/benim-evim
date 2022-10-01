@@ -227,5 +227,15 @@
     "desc1": "Şirketinizi hızlı bir şekilde kaydedelim.",
     "desc2": "Şirket Adını, Adresini ve habercilerden herhangi birini doldurun.",
     "desc3": "Ne kadar çok bilgi doldurursanız, müşterinin sizinle iletişim kurması o kadar kolay olur."
+  },
+
+  "footer": {
+    "mainMenu": {
+      "title": "Bölümler",
+      "item1": "Mülk arama",
+      "item2": "Kayıt",
+      "item3": "Yetkilendirme",
+      "item4": "Emlakçılara"
+    }
   }
 }
