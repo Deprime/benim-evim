@@ -7,6 +7,7 @@ import type IUser from "./user";
 import type ISettlement from "./settlement";
 import type IEstateStatus from "./estate-status";
 import type IPhoto from "./photo";
+import type IContactShort from "./contact-short";
 
 export default interface IEstate {
   id: number,
@@ -48,4 +49,5 @@ export default interface IEstate {
   status: IEstateStatus,
   currency: ICurrency,
   photos: [IPhoto],
+  contacts?: [IContactShort]|[]
 }

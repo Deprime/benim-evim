@@ -6,9 +6,8 @@
 
   import GallerySection from './_components/GallerySection.svelte';
   import PriceSection from './_components/PriceSection.svelte';
-  import ContactSection from './_components/ContactSection.svelte';
+  import ContactsSection from '$lib/components/shared/estate-list-item/ContactsSection.svelte';
   import MapSection from './_components/MapSection.svelte';
-
 
   import type { IEstate } from '$lib/interfaces';
 
@@ -82,9 +81,12 @@
       <section class="price mb-4">
         <PriceSection {estate} />
       </section>
-      <section class="contacts">
-        <ContactSection {estate} />
-      </section>
+
+      {#if estate.contacts?.length > 0}
+        <section class="contacts">
+          <ContactsSection {estate} />
+        </section>
+      {/if}
     </aside>
   </div>
 </div>

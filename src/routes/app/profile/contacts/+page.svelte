@@ -3,7 +3,7 @@
   import { _ } from '$lib/config/i18n';
 
   // Componetns
-  import { Input, Button, Label, Alert } from '$lib/components/ui';
+  import { Input, Label, Button, Alert } from '$lib/components/ui';
   import { PageHeader } from '$lib/components/shared';
 
   // Services
@@ -60,6 +60,31 @@
   }
 
   /**
+   * Get user contact list
+   */
+  const getUserContactList = async () => {
+    const response = await userApi.getContacts();
+    contacts = response.data;
+
+    contacts.forEach((contact: any) => {
+      const { pivot } = contact
+
+      if (contact.content_type === "messenger") {
+        const index = messenger_list.findIndex((item: any) => item.id === pivot.contact_id);
+        messenger_list[index].value = pivot.content;
+        messenger_list[index].test = pivot.content;
+      }
+
+      if (contact.content_type === "social") {
+        const index = social_list.findIndex((item: any) => item.id === pivot.contact_id);
+        social_list[index].value = pivot.content;
+        console.log(pivot.content)
+        social_list[index].test = pivot.content || null;
+      }
+    });
+  }
+
+  /**
    * Update contacts
    */
   const update = async () => {
@@ -70,6 +95,7 @@
       await userApi.updateContacts(data);
       toast.success($_('noty.save_success'), {position: "top-right"});
       form.errors = {};
+      await getUserContactList();
     }
     catch (error: any) {
       contacts = [];
@@ -82,25 +108,20 @@
     }
   }
 
+  /**
+   *
+   */
+  const checkLink = (social) => {
+    setTimeout(() => {
+      window.open(social.test, '_blank').focus();
+    }, 1000);
+  }
+
   onMount(async () => {
     form.loading = true;
     try {
       await getContactList();
-      const response = await userApi.getContacts();
-      contacts = response.data;
-
-      contacts.forEach((contact: any) => {
-        const { pivot } = contact
-        if (contact.content_type === "messenger") {
-          const index = messenger_list.findIndex((item: any) => item.id === pivot.contact_id);
-          messenger_list[index].value = pivot.content;
-        }
-
-        if (contact.content_type === "social") {
-          const index = social_list.findIndex((item: any) => item.id === pivot.contact_id);
-          social_list[index].value = pivot.content;
-        }
-      })
+      await getUserContactList();
     }
     finally {
       form.loading = false;
@@ -120,7 +141,7 @@
   </PageHeader>
 
   <div class="shadow sm:overflow-hidden sm:rounded-md bg-white">
-    <form on:submit|preventDefault={update} class="text-sm px-4 py-5 sm:p-6">
+    <div class="text-sm px-4 py-5 sm:p-6">
       <section class="space-y-4">
         <div>
           {#if form.errors.contacts}
@@ -140,12 +161,25 @@
           <section>
             {#each messenger_list as messenger}
               <div class="contact-form-item">
-                <Input
-                  label={messenger.title}
-                  disabled={form.loading}
-                  placeholder={messenger.placeholder || `https://enter-correct-address.com`}
-                  bind:value={messenger.value}
-                />
+                <div class="flex flex-row items-end space-x-2">
+                  <Input
+                    label={messenger.title}
+                    disabled={form.loading}
+                    placeholder={messenger.placeholder || `https://enter-correct-address.com`}
+                    class="flex-grow"
+                    bind:value={messenger.value}
+                  />
+
+                  {#if messenger.test}
+                    <Button
+                      variant="white"
+                      on:click={() => checkLink(messenger)}
+                    >
+                      {$_('actions.check')}
+                    </Button>
+                  {/if}
+                </div>
+
                 {#if messenger.example}
                   <p class="contact-example">
                     {$_('actions.example')}: {messenger.example}
@@ -160,12 +194,25 @@
           <section>
             {#each social_list as social}
               <div class="contact-form-item">
-                <Input
-                  label={social.title}
-                  disabled={form.loading}
-                  placeholder={social.placeholder || `https://enter-correct-address.com`}
-                  bind:value={social.value}
-                />
+                <div class="flex flex-row items-end space-x-2">
+                  <Input
+                    label={social.title}
+                    disabled={form.loading}
+                    placeholder={social.placeholder || `https://enter-correct-address.com`}
+                    class="flex-grow"
+                    bind:value={social.value}
+                  />
+
+                  {#if social.test}
+                    <Button
+                      variant="white"
+                      on:click={() => checkLink(social)}
+                    >
+                      {$_('actions.check')}
+                    </Button>
+                  {/if}
+                </div>
+
                 {#if social.example}
                   <p class="contact-example">
                     {$_('actions.example')}: {social.example}
@@ -176,7 +223,7 @@
           </section>
         {/if}
       </section>
-    </form>
+    </div>
     <footer class="bg-gray-100 px-4 py-3 text-right flex justify-end sm:px-6">
       <Button
         on:click={update}

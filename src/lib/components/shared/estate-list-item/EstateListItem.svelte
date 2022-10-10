@@ -3,9 +3,9 @@
 
   // Components
   import { Logo } from '$lib/components/shared';
-  import { Button } from '$lib/components/ui';
   import EstateGallery from './EstateGallery.svelte';
   import EstateStatus from './EstateStatus.svelte';
+  import ContactsSection from './ContactsSection.svelte';
 
   import type { IEstate } from '$lib/interfaces';
 
@@ -18,7 +18,7 @@
   const FORMAT_YMDHMS = 'DD.MM.YYYY H:m:s'
 
   $: estateTitle = getEstateTitle(editorMode);
-  $: estateUrl = getEstateUrl(editorMode);
+  $: estateUrl   = getEstateUrl(editorMode);
 
   // Methods
   /**
@@ -53,7 +53,7 @@
     </a>
   </h2>
 
-  <div class="estate-card-gallery-wrapper lg:basis-4/12  mb-4 lg:mb-0">
+  <div class="estate-card-gallery-wrapper lg:w-4/12  mb-4 lg:mb-0">
     <EstateGallery
       {estate}
       {editorMode}
@@ -135,19 +135,11 @@
         </div>
       </div>
 
-      <div class="estate-card-company-actions">
-        <Button block class="mb-2">
-          Заказать звонок
-        </Button>
-
-        <Button
-          block
-          variant="secondary"
-          class="mb-2"
-        >
-          Написать
-        </Button>
-      </div>
+      {#if estate.contacts?.length > 0}
+        <div class="estate-card-company-actions">
+          <ContactsSection {estate} />
+        </div>
+      {/if}
     {/if}
 
     <div class="estate-card-publish-date pt-4">
