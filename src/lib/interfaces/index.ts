@@ -7,3 +7,4 @@ export type { default as ICompany } from './company';
 export type { default as IUser } from './user';
 export type { default as IBuilder } from './builder';
 export type { default as ISettlement } from './settlement';
+export type { default as IContactShort } from './contact-short';
